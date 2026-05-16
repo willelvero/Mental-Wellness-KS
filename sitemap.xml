@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Mental Wellness KS sitemap.
+  Homepage only at launch. Add one <url> entry per public page as program/condition pages are built.
+  Set <lastmod> to the most recent edit date of that page (ISO 8601: YYYY-MM-DD).
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://mentalwellnessks.com/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!--
+    Add one <url> block per program page as they ship. Example:
+    <url>
+      <loc>https://mentalwellnessks.com/programs/intensive-outpatient-program/</loc>
+      <lastmod>YYYY-MM-DD</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+    </url>
+  -->
+
+  <!--
+    Add one <url> block per condition page as they ship (note: rename addictions/ → conditions/ first).
+    <url>
+      <loc>https://mentalwellnessks.com/conditions/anxiety/</loc>
+      <lastmod>YYYY-MM-DD</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+    </url>
+  -->
+
+</urlset>
