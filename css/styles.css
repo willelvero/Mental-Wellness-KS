@@ -292,81 +292,195 @@ em     { font-style: italic; color: inherit; }
 @media (max-width: 540px) { .header-cta { display: none; } }
 
 /* ---------------------------------------------------------------- 7. Hero */
+/* Centered editorial · soft photo overlay · poetic "cover line" with a    */
+/* rotating word · descriptive H1 subtitle · twin arrow-link CTAs.          */
+
 #hero {
   position: relative;
   min-height: calc(100svh - var(--header-h));
   display: flex;
   align-items: center;
-  color: #fff;
+  justify-content: center;
+  color: var(--bg);
   overflow: hidden;
+  text-align: center;
+  padding: var(--s-12) var(--s-6);
+  /* Layered darkening for type legibility — bumped strength so we can drop  */
+  /* text-shadows and let the typography read crisp. Photo crop pushed up    */
+  /* (35%) to bring mountains/palms into the upper visual field.             */
   background:
-    linear-gradient(95deg, rgba(15,28,46,0.78) 0%, rgba(15,28,46,0.45) 55%, rgba(15,28,46,0.12) 100%),
-    linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.55) 95%),
-    url('../images/hero.webp') center / cover no-repeat;
+    radial-gradient(ellipse 80% 65% at center, rgba(15,28,46,0.72) 0%, rgba(15,28,46,0.20) 70%, transparent 100%),
+    linear-gradient(180deg, rgba(15,28,46,0.38) 0%, rgba(15,28,46,0.40) 50%, rgba(15,28,46,0.58) 100%),
+    url('../images/hero.webp') center 35% / cover no-repeat;
+}
+@media (max-width: 768px) {
+  #hero { min-height: 88svh; padding: var(--s-10) var(--s-5); }
 }
 
-/* Vertical rule on the left — editorial column hint. */
-#hero::before {
+/* Faint horizon line above center — pure decoration */
+#hero::after {
   content: "";
   position: absolute;
-  left: max(var(--s-6), 4vw);
-  top: var(--s-10);
-  bottom: var(--s-10);
+  top: 38%;
+  left: 50%;
   width: 1px;
+  height: 96px;
   background: linear-gradient(180deg, transparent, rgba(201,165,116,0.55), transparent);
+  transform: translateX(-50%);
   pointer-events: none;
 }
+@media (max-width: 540px) { #hero::after { display: none; } }
 
-/* Side stamp — small editorial label in the top-right of hero */
-#hero::after {
-  content: "MWKS · EST. PALM SPRINGS · CALIFORNIA";
-  position: absolute;
-  top: var(--s-7);
-  right: var(--s-7);
-  font-family: var(--font-heading);
-  font-size: .6875rem;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: rgba(247,249,248,0.6);
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  transform: rotate(180deg);
-  pointer-events: none;
-}
-@media (max-width: 720px) { #hero::after { display: none; } }
-
-.hero-content {
-  max-width: 880px;
-  padding: var(--s-12) 0;
+.hero-inner {
   position: relative;
   z-index: 2;
+  width: 100%;
+  max-width: 920px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.hero-eyebrow {
-  color: var(--accent);
-  margin-bottom: var(--s-5);
-}
-.hero-eyebrow::before { background: var(--accent); }
+/* (corner mark removed) */
 
-#hero h1 {
-  color: #fff;
+/* Visual "cover line" — the focal element. Title-case, large, with a      */
+/* rotating accent word in italic sand. Two-tier hierarchy: "A path to"    */
+/* is demoted, the rotating word dominates.                                */
+.hero-poem {
+  font-family: var(--font-heading);
+  font-weight: 400;
   font-size: clamp(2.5rem, 7vw, 5.5rem);
-  line-height: 0.95;
+  line-height: 1.06;
   letter-spacing: -0.02em;
-  margin-bottom: var(--s-6);
+  color: var(--bg);
+  margin: 0 auto var(--s-6);     /* explicit horizontal centering */
+  text-align: center;            /* stays centered when rotator width changes */
+  text-transform: none;
+  max-width: 20ch;
+}
+
+/* Descriptive H1 (visually a subtitle — readable small caps, modest tracking) */
+.hero-subtitle {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(1rem, 0.5vw + 0.875rem, 1.25rem);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(247,249,248,0.98);
+  margin: 0 auto var(--s-7);
+  padding-bottom: var(--s-4);
+  position: relative;
   text-wrap: balance;
-  max-width: 18ch;
+  text-align: center;
+}
+/* Thin sand underline that animates in on page load — replaces em-dashes. */
+.hero-subtitle::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  animation: subtitleRule 1.2s 0.95s cubic-bezier(.2,.7,.2,1) forwards;
+}
+@keyframes subtitleRule {
+  from { width: 0; }
+  to   { width: 56px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-subtitle::after { width: 56px; animation: none; }
+}
+
+/* Rotating word — natural content width so "A path to [word]" reads as a  */
+/* single inline phrase with normal spacing. The whole line stays centered  */
+/* via the parent .hero-poem's text-align: center — line width fluctuates   */
+/* slightly when the word changes (peace vs yourself), but stays centered.  */
+.word-cycle {
+  display: inline-block;
+  height: 1.3em;
+  line-height: 1.3;
+  overflow: hidden;
+  vertical-align: -0.22em;
+  position: relative;
+  color: var(--accent);
+  font-style: italic;
+  text-align: left;              /* override parent's text-align: center so shorter words still sit flush-left */
+  padding-right: 0.2em;          /* room for italic letter overhang (e.g. the curl on 'f') */
+}
+.word-cycle__track {
+  display: block;
+  /* Slower, quieter easing — contemplative rather than energetic.         */
+  animation: wordCycle 22s cubic-bezier(0.7, 0, 0.3, 1) infinite;
+}
+.word-cycle__track > span {
+  display: block;
+  height: 1.3em;
+  line-height: 1.3;
+}
+@keyframes wordCycle {
+  0%, 17%   { transform: translateY(0); }
+  21%, 38%  { transform: translateY(-1.3em); }
+  42%, 59%  { transform: translateY(-2.6em); }
+  63%, 80%  { transform: translateY(-3.9em); }
+  84%, 100% { transform: translateY(-5.2em); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .word-cycle__track { animation: none; }
 }
 
 .hero-lede {
-  font-size: clamp(1.0625rem, 0.6vw + 1rem, 1.3125rem);
-  line-height: 1.5;
-  color: rgba(247,249,248,0.88);
-  max-width: 52ch;
-  margin-bottom: var(--s-7);
-  padding-left: var(--s-4);
-  border-left: 1px solid rgba(201,165,116,0.5);
+  font-size: clamp(1rem, 0.4vw + 0.95rem, 1.1875rem);
+  line-height: 1.6;
+  color: rgba(247,249,248,0.96);
+  max-width: 56ch;
+  margin: 0 auto var(--s-9);
+  /* no left rule — centered layout */
+  border: 0;
+  padding: 0;
 }
+
+/* Twin arrow-link CTAs — restrained, ink-on-photo */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-7);
+  justify-content: center;
+  align-items: baseline;
+}
+
+.hero-action {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  font-family: var(--font-heading);
+  font-size: clamp(0.875rem, 0.3vw + 0.8rem, 1rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(247,249,248,0.96);
+  text-decoration: none;
+  padding: var(--s-3) 0;
+  border-bottom: 1px solid rgba(247,249,248,0.50);
+  transition: color .3s, border-color .3s, gap .3s;
+}
+.hero-action--primary {
+  color: #fff;
+  border-color: var(--accent);
+  border-bottom-width: 2px;
+}
+.hero-action__arrow {
+  display: inline-block;
+  font-size: 1.1em;
+  color: var(--accent);
+  transition: transform .35s cubic-bezier(.2,.7,.2,1);
+}
+.hero-action:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  gap: var(--s-4);
+}
+.hero-action:hover .hero-action__arrow { transform: translateX(6px); }
 
 /* ------------------------------------------------------------ 8. Buttons */
 .btn, .cta-tel {
@@ -404,15 +518,6 @@ em     { font-style: italic; color: inherit; }
 }
 .btn-outline-dark:hover { background: var(--ink); color: var(--bg); }
 
-/* Hero pill: light surface, primary text */
-#hero .btn-dark {
-  background: rgba(255,255,255,0.96);
-  color: var(--primary);
-  border-color: rgba(255,255,255,0.96);
-  backdrop-filter: blur(4px);
-}
-#hero .btn-dark:hover { background: var(--accent); color: var(--ink); border-color: var(--accent); }
-
 /* CTA tel — base style; final CTA section overrides this for typographic moment */
 .cta-tel {
   background: var(--primary);
@@ -429,57 +534,30 @@ em     { font-style: italic; color: inherit; }
 #programs {
   background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
   counter-reset: programs;
-  padding-bottom: var(--s-10);
+  padding-bottom: var(--s-9);
 }
 
-#programs > .container { padding-bottom: var(--s-7); }
+#programs > .container { padding-bottom: var(--s-6); }
 
 #programs > .container > h2 {
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
   max-width: 14ch;
   margin-bottom: 0;
 }
 
-.program-block {
-  counter-increment: programs;
-  padding: var(--s-9) 0;
-  position: relative;
-}
-.program-block + .program-block { border-top: 1px solid var(--border); }
-
-.program-block__inner {
+/* 2 x 2 card grid */
+.program-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--s-9);
-  align-items: center;
+  gap: var(--s-8) var(--s-7);
 }
 
-.program-block__text { position: relative; }
-.program-block__text::before {
-  content: counter(programs, decimal-leading-zero);
-  display: block;
-  font-family: var(--font-heading);
-  font-size: clamp(2rem, 3vw, 3rem);
-  font-weight: 400;
-  color: var(--accent);
-  letter-spacing: 0.04em;
-  line-height: 1;
-  margin-bottom: var(--s-4);
-  opacity: 0.85;
-}
-.program-block__text h3 {
-  font-size: clamp(1.5rem, 2vw + 0.5rem, 2.125rem);
-  color: var(--primary);
-  margin-bottom: var(--s-4);
-  letter-spacing: -0.005em;
-  text-wrap: balance;
-}
-.program-block__text p {
-  color: #3a3a3a;
-  font-size: 1.0625rem;
-  line-height: 1.6;
-  max-width: 52ch;
-  margin-bottom: var(--s-5);
+.program-block {
+  counter-increment: programs;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  position: relative;
 }
 
 .program-block__image {
@@ -488,16 +566,16 @@ em     { font-style: italic; color: inherit; }
 .program-block__image::before {
   content: "";
   position: absolute;
-  inset: -12px 12px 12px -12px;
+  inset: -8px 8px 8px -8px;
   border: 1px solid var(--accent);
   border-radius: var(--radius-lg);
   z-index: -1;
-  opacity: .6;
+  opacity: .55;
 }
 .program-block__image img {
   width: 100%;
   height: auto;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 10;
   object-fit: cover;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
@@ -505,11 +583,32 @@ em     { font-style: italic; color: inherit; }
 }
 .program-block:hover .program-block__image img { transform: scale(1.02); }
 
-/* Image-left variant: flip order + flip frame inset */
-.program-block--image-left .program-block__inner > .program-block__image { order: 1; }
-.program-block--image-left .program-block__inner > .program-block__text  { order: 2; }
-.program-block--image-left .program-block__image::before {
-  inset: -12px -12px 12px 12px;
+.program-block__text { position: relative; padding-top: var(--s-2); }
+.program-block__text::before {
+  content: counter(programs, decimal-leading-zero);
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.375rem;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-bottom: var(--s-2);
+  opacity: 0.85;
+}
+.program-block__text h3 {
+  font-size: clamp(1.125rem, 1vw + 0.5rem, 1.5rem);
+  color: var(--primary);
+  margin-bottom: var(--s-3);
+  letter-spacing: -0.005em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+.program-block__text p {
+  color: #3a3a3a;
+  font-size: .9375rem;
+  line-height: 1.55;
+  margin-bottom: var(--s-4);
 }
 
 .program-link {
@@ -541,11 +640,8 @@ em     { font-style: italic; color: inherit; }
 .program-link:hover::after  { transform: translateX(4px); }
 
 @media (max-width: 820px) {
-  .program-block__inner { grid-template-columns: 1fr; gap: var(--s-6); }
-  .program-block--image-left .program-block__inner > .program-block__image { order: 0; }
-  .program-block--image-left .program-block__inner > .program-block__text  { order: 0; }
+  .program-grid { grid-template-columns: 1fr; gap: var(--s-7); }
   .program-block__image::before { display: none; }
-  .program-block { padding: var(--s-7) 0; }
 }
 
 /* -------------------------------------- 10. Admissions — typographic steps */
@@ -626,53 +722,78 @@ em     { font-style: italic; color: inherit; }
 
 .section-cta { margin-top: var(--s-9); text-align: center; }
 
-/* ------------------------------------------ 11. Healing-environment banner */
-.banner {
-  position: relative;
-  min-height: 540px;
-  display: flex;
-  align-items: center;
-  color: var(--bg);
-  background:
-    linear-gradient(115deg, rgba(31,58,95,0.78) 0%, rgba(31,58,95,0.40) 60%, rgba(160,129,77,0.15) 100%),
-    linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.45)),
-    url('../images/healing-environment.webp') center / cover no-repeat;
-  overflow: hidden;
-}
-/* A soft warm light leak from the right — desert light */
-.banner::after {
-  content: "";
-  position: absolute;
-  top: -20%;
-  right: -10%;
-  width: 60%;
-  height: 140%;
-  background: radial-gradient(closest-side, rgba(201,165,116,0.25), transparent 70%);
-  pointer-events: none;
+/* ----------------------------------------------- 11. What We Treat grid */
+#conditions {
+  background: var(--paper);
 }
 
-.banner-content {
-  position: relative;
-  z-index: 2;
-  padding: var(--s-10) 0;
-  max-width: 760px;
+#conditions > .container {
+  text-align: center;
 }
-.banner-content h2 {
-  color: var(--bg);
-  font-size: clamp(2rem, 4vw + 1rem, 3.75rem);
-  line-height: 1.0;
-  letter-spacing: -0.01em;
-  margin-bottom: var(--s-5);
-  text-wrap: balance;
+#conditions > .container > h2 {
+  max-width: 22ch;
+  margin-left: auto;
+  margin-right: auto;
 }
-.banner-content p {
-  font-size: 1.125rem;
-  line-height: 1.55;
-  color: rgba(247,249,248,0.86);
-  max-width: 54ch;
+#conditions > .container > .section-lede {
+  margin-left: auto;
+  margin-right: auto;
 }
-.banner-eyebrow { color: rgba(201,165,116,0.85); }
-.banner-eyebrow::before { background: rgba(201,165,116,0.85); }
+
+.conditions-list {
+  list-style: none;
+  margin: var(--s-7) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  justify-content: center;
+}
+
+/* Pill tag — compact, wraps on any width, sand dot on the left */
+.condition-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--s-3) var(--s-5);
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-family: var(--font-heading);
+  font-size: .8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+  line-height: 1;
+  white-space: nowrap;
+  transition: border-color .25s ease, background .25s ease, color .25s ease, transform .15s ease;
+}
+
+.condition-tag::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background: var(--accent);
+  border-radius: 50%;
+  margin-right: var(--s-3);
+  flex-shrink: 0;
+}
+
+.condition-tag:hover {
+  border-color: var(--accent);
+  background: #FBF6EC;            /* very subtle sand tint */
+  color: var(--accent-deep);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 540px) {
+  .conditions-list { gap: var(--s-2); }
+  .condition-tag {
+    padding: var(--s-3) var(--s-4);
+    font-size: .75rem;
+    letter-spacing: 0.08em;
+  }
+}
 
 /* -------------------------------------------------- 12. Founder — about */
 #about { background: var(--surface); padding: var(--s-12) 0; }
@@ -793,9 +914,14 @@ em     { font-style: italic; color: inherit; }
   margin: var(--s-7) 0 var(--s-7);
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(4, 1fr);    /* desktop: 2 rows of 4 */
   gap: var(--s-4);
   align-items: stretch;
+}
+@media (max-width: 720px) {
+  .insurance-list {
+    grid-template-columns: repeat(2, 1fr);  /* mobile: 4 rows of 2 */
+  }
 }
 .insurance-list li {
   background: var(--surface);
@@ -1016,13 +1142,13 @@ em     { font-style: italic; color: inherit; }
 
 /* ----------------------------------------------------- 18. Page-load reveals */
 @media (prefers-reduced-motion: no-preference) {
-  .hero-eyebrow { animation: rise .8s 0.05s cubic-bezier(.2,.7,.2,1) both; }
-  #hero h1       { animation: rise .9s 0.15s cubic-bezier(.2,.7,.2,1) both; }
-  .hero-lede     { animation: rise .9s 0.3s  cubic-bezier(.2,.7,.2,1) both; }
-  #hero .btn     { animation: rise .9s 0.45s cubic-bezier(.2,.7,.2,1) both; }
+  .hero-poem      { animation: rise 1.0s 0.14s cubic-bezier(.2,.7,.2,1) both; }
+  .hero-subtitle  { animation: rise .9s 0.42s cubic-bezier(.2,.7,.2,1) both; }
+  .hero-lede      { animation: rise .9s 0.62s cubic-bezier(.2,.7,.2,1) both; }
+  .hero-actions   { animation: rise .9s 0.82s cubic-bezier(.2,.7,.2,1) both; }
 
   @keyframes rise {
-    from { opacity: 0; transform: translateY(14px); }
+    from { opacity: 0; transform: translateY(18px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 }
