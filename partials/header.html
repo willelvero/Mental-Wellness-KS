@@ -3,17 +3,36 @@
   <header id="site-header">
     <div class="container header-inner">
       <a href="{{base}}index.html" class="logo" aria-label="Mental Wellness KS home">
-        <img src="{{base}}images/logo.svg" alt="Mental Wellness KS" width="160" height="40">
+        <img src="{{base}}images/logo.webp" alt="Mental Wellness KS" decoding="async" width="160" height="40">
       </a>
 
       <nav id="primary-nav" aria-label="Primary">
         <button id="nav-close" class="nav-close" aria-label="Close menu">&#10005;</button>
         <ul class="nav-list">
           <li><a href="{{home}}#about">About</a></li>
-          <li><a href="{{home}}#programs">Programs</a></li>
-          <li><a href="{{home}}#admissions">Admissions</a></li>
           <li><a href="{{home}}#insurance">Insurance</a></li>
           <li><a href="{{home}}#contact">Contact</a></li>
+          <li class="nav-has-dropdown">
+            <a href="{{home}}#conditions" class="nav-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="conditions-menu">
+              <span class="nav-trigger__label">What We Treat</span>
+              <span class="nav-caret" aria-hidden="true">
+                <svg viewBox="0 0 12 12" width="12" height="12"><path d="M2.5 4.5l3.5 3.5 3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+            <ul class="nav-dropdown" id="conditions-menu" aria-label="Conditions we treat">
+              <li><a href="{{home}}#conditions">Anxiety</a></li>
+              <li><a href="{{home}}#conditions">Depression</a></li>
+              <li><a href="{{home}}#conditions">Bipolar Disorder</a></li>
+              <li><a href="{{home}}#conditions">OCD</a></li>
+              <li><a href="{{home}}#conditions">Veteran PTSD</a></li>
+              <li><a href="{{home}}#conditions">Schizophrenia</a></li>
+              <li><a href="{{home}}#conditions">Self-Harm</a></li>
+              <li><a href="{{home}}#conditions">Social Anxiety</a></li>
+              <li><a href="{{home}}#conditions">Psychosis</a></li>
+              <li><a href="{{home}}#conditions">Trauma &amp; PTSD</a></li>
+              <li><a href="{{home}}#conditions">Suicidal Ideation</a></li>
+            </ul>
+          </li>
         </ul>
       </nav>
 
