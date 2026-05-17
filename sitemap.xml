@@ -8,9 +8,23 @@
 
   <url>
     <loc>https://mentalwellnessks.com/</loc>
-    <lastmod>2026-05-15</lastmod>
+    <lastmod>2026-05-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://mentalwellnessks.com/tour/</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://mentalwellnessks.com/conditions/anxiety/</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <!--
