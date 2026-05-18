@@ -1948,23 +1948,44 @@ em     { font-style: italic; color: inherit; }
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--s-3);
+  gap: var(--s-4);
   justify-self: center;
   width: max-content;
   max-width: 100%;
-  margin-top: var(--s-4);
-  padding: var(--s-4) 0;
+  margin-top: var(--s-5);
+  padding: var(--s-6) clamp(40px, 6vw, 72px);
   font-size: inherit;
-  border-bottom: 1px solid rgba(201,165,116,0.4);
+  background:
+    radial-gradient(120% 140% at 50% 0%, rgba(201, 165, 116, 0.16), transparent 70%),
+    rgba(201, 165, 116, 0.05);
+  border: 1px solid rgba(201, 165, 116, 0.32);
+  border-radius: 999px;
   text-align: center;
   line-height: 1;
+  position: relative;
+  isolation: isolate;
+  transition: background 320ms ease, border-color 320ms ease, transform 320ms ease, box-shadow 320ms ease;
 }
+.tour-close .cta-tel:hover,
+.tour-close .cta-tel:focus-visible {
+  background:
+    radial-gradient(120% 140% at 50% 0%, rgba(201, 165, 116, 0.28), transparent 70%),
+    rgba(201, 165, 116, 0.10);
+  border-color: rgba(201, 165, 116, 0.65);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px -16px rgba(201, 165, 116, 0.50);
+}
+.tour-close .cta-tel:hover .cta-tel__number,
+.tour-close .cta-tel:focus-visible .cta-tel__number { color: var(--accent); }
+.tour-close .cta-tel:hover .cta-tel__label,
+.tour-close .cta-tel:focus-visible .cta-tel__label { color: rgba(255, 255, 255, 0.88); }
 .tour-close .cta-tel__label {
   font-family: var(--font-heading);
   font-size: .6875rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.62);
+  transition: color 320ms ease;
 }
 .tour-close .cta-tel__number {
   font-family: var(--font-heading);
@@ -1972,6 +1993,7 @@ em     { font-style: italic; color: inherit; }
   letter-spacing: -0.005em;
   color: #fff;
   font-variant-numeric: tabular-nums;
+  transition: color 320ms ease;
 }
 .tour-close .cta-tel:hover .cta-tel__number { color: var(--accent); }
 .tour-close__address {
@@ -2340,4 +2362,1787 @@ em     { font-style: italic; color: inherit; }
     }
     .faq-item[open]::details-content { block-size: auto; }
   }
+}
+
+/* ============================================================
+   21. DEPRESSION PAGE — src/conditions/depression.html
+   Sections (each gets its own visual treatment):
+     01 Hero            — asymmetric 2-col w/ editorial aside
+     02 Differential    — 3-col "vs." comparison
+     03 Trajectory      — vertical timeline w/ week markers
+     04 TRD spine       — chaptered subsections w/ roman indices
+     05 Mechanism       — reused .depression-chapter (single chapter)
+     06 Family-impact   — 2-col intro + bordered "includes" aside
+     07 Crisis section  — distinctive dark safety footer
+     Reused: hero, .depression-chapter, .depression-figure,
+             .condition-prose, .check-list, .faq-list, closing CTA
+   ============================================================ */
+
+/* Shared section title + lede used across the new sections - */
+.depression-section-title {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  line-height: 1.06;
+  letter-spacing: -0.008em;
+  color: var(--primary);
+  margin: 0 0 var(--s-5);
+  max-width: 22ch;
+  text-wrap: balance;
+}
+.depression-section-lede {
+  font-size: clamp(1.0625rem, 0.5vw + 1rem, 1.1875rem);
+  line-height: 1.7;
+  color: #3a3a3a;
+  max-width: 64ch;
+  margin: 0 0 var(--s-8);
+}
+
+/* HERO — asymmetric -------------------------------------- */
+.depression-hero {
+  padding: clamp(48px, 7vh, 96px) 0 clamp(56px, 8vh, 104px);
+  background: var(--bg);
+}
+.depression-hero__grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: clamp(40px, 6vw, 96px);
+  align-items: end;
+}
+.depression-hero__primary { max-width: 720px; }
+.depression-hero__title {
+  margin: var(--s-3) 0 var(--s-5);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: clamp(2.25rem, 5.2vw, 4.25rem);
+  line-height: 1.04;
+  letter-spacing: -0.012em;
+  color: var(--primary);
+  max-width: 18ch;
+}
+.depression-hero__lede {
+  font-size: clamp(1.0625rem, 0.5vw + 1rem, 1.3125rem);
+  line-height: 1.6;
+  color: #3a3a3a;
+  max-width: 52ch;
+  margin-bottom: var(--s-7);
+}
+.depression-hero__aside {
+  position: relative;
+  padding: var(--s-7) 0 var(--s-7) var(--s-6);
+  border-left: 1px solid var(--accent);
+  align-self: end;
+  max-width: 420px;
+  justify-self: end;
+}
+.depression-hero__label,
+.depression-hero__sublabel {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: .6875rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.depression-hero__sublabel { color: var(--muted); margin-top: var(--s-4); }
+.depression-hero__quote {
+  margin: var(--s-4) 0 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(1.0625rem, 1.4vw + .5rem, 1.4375rem);
+  line-height: 1.4;
+  color: var(--primary);
+  letter-spacing: -0.003em;
+}
+@media (max-width: 900px) {
+  .depression-hero__grid { grid-template-columns: 1fr; gap: var(--s-7); align-items: start; }
+  .depression-hero__aside { justify-self: start; max-width: 100%; }
+}
+
+/* 02 · DIFFERENTIAL — 3-col "vs." comparison ------------- */
+.differential-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(24px, 3vw, 48px);
+  margin-top: var(--s-6);
+}
+.differential {
+  display: grid;
+  gap: var(--s-4);
+  padding: clamp(24px, 2.5vw, 32px) 0 0;
+  border-top: 1px solid var(--accent);
+}
+.differential__label {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: .75rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.differential__what {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--muted);
+  font-style: italic;
+}
+.differential__divider {
+  margin: var(--s-1) 0;
+  font-family: var(--font-heading);
+  font-size: .75rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+  position: relative;
+  padding-left: 28px;
+}
+.differential__divider::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 50%;
+  width: 18px; height: 1px;
+  background: var(--accent);
+}
+.differential__contrast {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: #2b2b2b;
+}
+.differential__contrast strong {
+  color: var(--primary);
+  font-weight: 400;
+}
+@media (max-width: 900px) {
+  .differential-grid { grid-template-columns: 1fr; gap: var(--s-7); }
+}
+
+/* 03 · TRAJECTORY — vertical timeline -------------------- */
+.trajectory {
+  list-style: none;
+  margin: var(--s-6) 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+  position: relative;
+}
+.trajectory__step {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: clamp(28px, 4vw, 56px);
+  padding: var(--s-7) 0;
+  position: relative;
+}
+.trajectory__step + .trajectory__step::before {
+  /* vertical connector */
+  content: "";
+  position: absolute;
+  left: calc(180px - 6px + clamp(28px, 4vw, 56px) / 2 - var(--s-7));
+  /* fallback: simple line drawn between dots */
+  display: none;
+}
+.trajectory__marker {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  position: relative;
+}
+.trajectory__week {
+  font-family: var(--font-heading);
+  font-size: .8125rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  white-space: nowrap;
+}
+.trajectory__dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+.trajectory__step:not(:last-child) .trajectory__marker::after {
+  /* connector line down to next dot */
+  content: "";
+  position: absolute;
+  left: calc(100% - 5px);
+  top: calc(50% + 8px);
+  width: 1px;
+  height: calc(100% + var(--s-7) * 2 - 16px);
+  background: var(--border);
+}
+.trajectory__body h3 {
+  margin: 0 0 var(--s-3);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: clamp(1.1875rem, 1.6vw + .5rem, 1.5rem);
+  letter-spacing: -0.005em;
+  color: var(--primary);
+  line-height: 1.18;
+}
+.trajectory__body p {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: #3a3a3a;
+  max-width: 64ch;
+}
+@media (max-width: 760px) {
+  .trajectory__step { grid-template-columns: 1fr; gap: var(--s-3); padding: var(--s-6) 0; }
+  .trajectory__step:not(:last-child) .trajectory__marker::after { display: none; }
+}
+
+/* IMAGE BREAK -------------------------------------------- */
+.depression-figure {
+  margin: 0;
+  width: 100%;
+  background: var(--bg);
+  overflow: hidden;
+}
+.depression-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+  filter: saturate(.92);
+}
+@media (max-width: 760px) {
+  .depression-figure img { aspect-ratio: 4 / 3; }
+}
+
+/* 04 · TRD SPINE — chaptered subsections ----------------- */
+.trd-section { background: var(--bg); }
+.trd-chapters {
+  display: grid;
+  gap: 0;
+  margin-top: var(--s-7);
+}
+.trd-chapter {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: clamp(28px, 4vw, 56px);
+  padding: var(--s-7) 0;
+  border-top: 1px solid var(--border);
+  align-items: start;
+}
+.trd-chapter:last-of-type { border-bottom: 1px solid var(--border); }
+.trd-chapter__index {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: var(--accent);
+  letter-spacing: 0;
+}
+.trd-chapter__body h3 {
+  margin: 0 0 var(--s-4);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: clamp(1.25rem, 1.6vw + .5rem, 1.625rem);
+  letter-spacing: -0.005em;
+  color: var(--primary);
+  line-height: 1.2;
+}
+.trd-chapter__body p {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: #3a3a3a;
+  max-width: 68ch;
+}
+.trd-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-top: var(--s-7);
+  padding: var(--s-3) 0;
+  font-family: var(--font-heading);
+  font-size: .8125rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  transition: color 240ms ease, border-color 240ms ease;
+}
+.trd-cta:hover,
+.trd-cta:focus-visible {
+  color: var(--accent-deep);
+  border-color: var(--accent-deep);
+}
+.trd-cta span + span { transition: transform 240ms ease; }
+.trd-cta:hover span + span { transform: translateX(4px); }
+@media (max-width: 760px) {
+  .trd-chapter { grid-template-columns: 1fr; gap: var(--s-3); padding: var(--s-6) 0; }
+}
+
+/* 05 · MECHANISM — reuses .depression-chapter ------------ */
+.depression-chapter {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: start;
+  max-width: 1080px;
+}
+.depression-chapter__index {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  line-height: 0.9;
+  color: var(--accent);
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+.depression-chapter__content h2 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.005em;
+  color: var(--primary);
+  margin: 0 0 var(--s-5);
+  max-width: 22ch;
+}
+.depression-chapter__content p {
+  font-size: 1.0625rem;
+  line-height: 1.78;
+  color: #3a3a3a;
+  max-width: 64ch;
+  margin-bottom: var(--s-5);
+}
+.depression-chapter__content p:last-child { margin-bottom: 0; }
+.depression-chapter__content strong { color: var(--primary); font-weight: 400; }
+@media (max-width: 760px) {
+  .depression-chapter { grid-template-columns: 1fr; gap: var(--s-5); }
+  .depression-chapter__index { font-size: 3rem; }
+}
+
+/* 06 · FAMILY IMPACT — 2-col w/ bordered aside ----------- */
+.family-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: clamp(40px, 5vw, 88px);
+  align-items: start;
+}
+.family-grid__intro p {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: #3a3a3a;
+  margin-bottom: var(--s-5);
+  max-width: 60ch;
+}
+.family-grid__intro p:last-child { margin-bottom: 0; }
+.family-grid__intro strong { color: var(--primary); font-weight: 400; }
+.family-grid__includes {
+  padding: var(--s-6);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--accent);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+.family-grid__includes-label {
+  margin: 0 0 var(--s-5);
+  font-family: var(--font-heading);
+  font-size: .6875rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.family-grid__includes ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-4);
+}
+.family-grid__includes li {
+  padding-left: var(--s-5);
+  position: relative;
+  font-size: .9375rem;
+  line-height: 1.6;
+  color: #3a3a3a;
+}
+.family-grid__includes li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+@media (max-width: 900px) {
+  .family-grid { grid-template-columns: 1fr; gap: var(--s-7); }
+}
+
+/* 07 · CRISIS SAFETY SECTION ----------------------------- */
+.crisis-section {
+  background: #14223a;
+  padding: clamp(56px, 8vh, 96px) 0;
+  border-top: 2px solid var(--accent);
+  position: relative;
+}
+.crisis-section__inner {
+  display: grid;
+  gap: var(--s-5);
+  max-width: 880px;
+}
+.crisis-section__eyebrow {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: .75rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.crisis-section__main {
+  display: grid;
+  gap: var(--s-5);
+}
+.crisis-section__title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+.crisis-section__body {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.84);
+  max-width: 64ch;
+}
+.crisis-section__body strong { color: #fff; font-weight: 400; }
+.crisis-section__body a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: rgba(201, 165, 116, 0.5);
+  text-underline-offset: 4px;
+  transition: text-decoration-color 200ms ease;
+}
+.crisis-section__body a:hover { text-decoration-color: var(--accent); }
+
+/* ============================================================
+   21b. DEPRESSION PAGE — V3 components restored
+   (.depression-types/.depression-callout/.depression-signs/
+    .depression-loc/.depression-modalities/.depression-pillars
+    — used by the rebuilt depression page; reuses
+    .depression-hero, .depression-chapter, .depression-figure
+    already defined above)
+   ============================================================ */
+
+/* TYPES — numbered vertical chapters w/ hairline rules ---- */
+.depression-types {
+  margin-top: var(--s-7);
+  display: grid;
+  gap: 0;
+}
+.depression-type {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: clamp(28px, 4vw, 64px);
+  padding: var(--s-7) 0;
+  align-items: start;
+}
+.depression-type__meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+.depression-type__index {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.depression-type__abbr {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: .6875rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.depression-type__body h3 {
+  margin: 0 0 var(--s-3);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: clamp(1.25rem, 1.6vw + .5rem, 1.625rem);
+  letter-spacing: -0.005em;
+  color: var(--primary);
+  line-height: 1.18;
+}
+.depression-type__body p {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: #3a3a3a;
+  max-width: 64ch;
+}
+.depression-rule {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+@media (max-width: 760px) {
+  .depression-type { grid-template-columns: 1fr; gap: var(--s-4); padding: var(--s-6) 0; }
+  .depression-type__meta { flex-direction: row; align-items: baseline; gap: var(--s-4); }
+}
+
+/* TREATMENT-RESISTANT CALLOUT (dark feature) ------------- */
+.depression-callout {
+  background: var(--primary);
+  color: #fff;
+  padding: clamp(72px, 12vh, 144px) 0;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.depression-callout::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(80% 80% at 85% 0%, rgba(201, 165, 116, 0.22), transparent 60%),
+    radial-gradient(80% 80% at 0% 100%, rgba(104, 160, 191, 0.16), transparent 60%);
+  z-index: -1;
+}
+.depression-callout__inner {
+  max-width: 920px;
+  display: grid;
+  gap: var(--s-5);
+}
+.depression-callout__eyebrow {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: .75rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.depression-callout__title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: clamp(2rem, 4.4vw, 3.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.008em;
+  color: #fff;
+  max-width: 22ch;
+}
+.depression-callout__body {
+  margin: 0;
+  font-size: clamp(1.0625rem, 0.6vw + 1rem, 1.25rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 60ch;
+}
+.depression-callout__cta {
+  margin-top: var(--s-5);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  width: max-content;
+  padding: var(--s-3) 0;
+  font-family: var(--font-heading);
+  font-size: .8125rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201, 165, 116, 0.55);
+  transition: color 240ms ease, border-color 240ms ease;
+}
+.depression-callout__cta:hover,
+.depression-callout__cta:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.depression-callout__cta span + span { transition: transform 240ms ease; }
+.depression-callout__cta:hover span + span { transform: translateX(4px); }
+
+/* SIGNS — side-by-side (also used for Helping a Loved One) - */
+.depression-signs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 5vw, 96px);
+  align-items: start;
+}
+.depression-signs__intro h2 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+  max-width: 18ch;
+  margin-bottom: var(--s-5);
+}
+.depression-signs__intro p {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: #3a3a3a;
+  margin-bottom: var(--s-4);
+}
+.depression-signs__list { margin: 0; }
+@media (max-width: 900px) {
+  .depression-signs { grid-template-columns: 1fr; gap: var(--s-6); }
+}
+
+/* LEVELS OF CARE — continuous flow ---------------------- */
+.depression-loc {
+  margin-top: var(--s-7);
+  display: grid;
+  gap: 0;
+}
+.depression-loc__row {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: clamp(28px, 4vw, 64px);
+  padding: var(--s-7) 0;
+  border-top: 1px solid var(--border);
+  align-items: start;
+}
+.depression-loc__row:last-child { border-bottom: 1px solid var(--border); }
+.depression-loc__index {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(2rem, 3vw + .5rem, 3rem);
+  line-height: 1;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.depression-loc__content h3 {
+  margin: 0 0 var(--s-3);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: clamp(1.25rem, 1.8vw + .5rem, 1.75rem);
+  letter-spacing: -0.005em;
+  color: var(--primary);
+  line-height: 1.15;
+}
+.depression-loc__detail {
+  margin: 0 0 var(--s-4);
+  font-family: var(--font-heading);
+  font-size: .75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.depression-loc__content p:last-child {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: #3a3a3a;
+  max-width: 64ch;
+}
+@media (max-width: 760px) {
+  .depression-loc__row { grid-template-columns: 1fr; gap: var(--s-4); padding: var(--s-6) 0; }
+}
+
+/* MODALITIES — single-column chapter list --------------- */
+.depression-modalities {
+  margin-top: var(--s-7);
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0;
+}
+.depression-modality {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: clamp(28px, 4vw, 56px);
+  padding: var(--s-6) 0;
+  border-top: 1px solid var(--border);
+  align-items: baseline;
+}
+.depression-modality:last-child { border-bottom: 1px solid var(--border); }
+.depression-modality__index {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.depression-modality__body h3 {
+  margin: 0 0 var(--s-3);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: 1.1875rem;
+  letter-spacing: -0.003em;
+  color: var(--primary);
+  line-height: 1.2;
+}
+.depression-modality__body p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #3a3a3a;
+  max-width: 68ch;
+}
+@media (max-width: 760px) {
+  .depression-modality { grid-template-columns: 1fr; gap: var(--s-3); padding: var(--s-5) 0; }
+  .depression-modality__index { font-size: 1.5rem; }
+}
+
+/* PILLARS — 3 wider columns ----------------------------- */
+.depression-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(28px, 3vw, 48px);
+  margin-top: var(--s-7);
+}
+.depression-pillar {
+  padding-top: var(--s-5);
+  border-top: 2px solid var(--accent);
+}
+.depression-pillar__index {
+  margin: 0 0 var(--s-3);
+  font-family: var(--font-heading);
+  font-size: .75rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.depression-pillar h3 {
+  margin: 0 0 var(--s-4);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: clamp(1.0625rem, 1vw + .5rem, 1.25rem);
+  letter-spacing: -0.003em;
+  color: var(--primary);
+  line-height: 1.25;
+  max-width: 22ch;
+}
+.depression-pillar p {
+  margin: 0;
+  font-size: .9375rem;
+  line-height: 1.65;
+  color: #3a3a3a;
+}
+@media (max-width: 900px) { .depression-pillars { grid-template-columns: 1fr; gap: var(--s-6); } }
+
+/* ============================================================
+   21c. DEPRESSION PAGE — V4 unique components
+   New section-specific components with no anxiety parallel:
+     .depression-stat       — large statistic in hero aside
+     .symptom-categories    — 3-col mood/physical/cognitive grid
+     .causes-list           — definition-list of risk factors
+     .depression-forms      — subtypes grouped by pattern
+     .treatment-narrative   — phased editorial treatment story
+     .helping-list          — numbered helping-loved-one steps
+     .talk-grid             — try-saying / try-to-avoid scripts
+     .alone-block           — closing reassurance section
+   ============================================================ */
+
+/* Hero statistic aside (replaces editorial pull-quote) ---- */
+.depression-stat {
+  position: relative;
+  padding: var(--s-7) var(--s-6) var(--s-7) var(--s-7);
+  border-left: 1px solid var(--accent);
+  align-self: end;
+  max-width: 380px;
+  justify-self: end;
+  display: grid;
+  gap: var(--s-3);
+}
+.depression-stat__number {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(4rem, 8vw, 6.5rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.depression-stat__caption {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--primary);
+  max-width: 28ch;
+}
+.depression-stat__sub {
+  margin: var(--s-3) 0 0;
+  font-size: .875rem;
+  line-height: 1.55;
+  color: var(--muted);
+  font-style: italic;
+}
+@media (max-width: 900px) {
+  .depression-stat { justify-self: start; max-width: 100%; }
+}
+
+/* Symptom categories — 3-col grouped grid ---------------- */
+.symptom-categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(24px, 3vw, 48px);
+  margin-top: var(--s-7);
+}
+.symptom-category {
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--accent);
+}
+.symptom-category__label {
+  margin: 0 0 var(--s-5);
+  font-family: var(--font-heading);
+  font-size: .75rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.symptom-category ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-3);
+}
+.symptom-category li {
+  padding-left: var(--s-4);
+  position: relative;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: #3a3a3a;
+}
+.symptom-category li::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 600;
+}
+@media (max-width: 900px) {
+  .symptom-categories { grid-template-columns: 1fr; gap: var(--s-7); }
+}
+
+/* "What causes depression" — definition list ------------- */
+.causes-list {
+  margin: var(--s-7) 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+.causes-list__row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: clamp(28px, 4vw, 56px);
+  padding: var(--s-6) 0;
+  border-top: 1px solid var(--border);
+  align-items: baseline;
+}
+.causes-list__row:last-child { border-bottom: 1px solid var(--border); }
+.causes-list__row dt {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.0625rem;
+  letter-spacing: -0.005em;
+  color: var(--primary);
+  margin: 0;
+}
+.causes-list__row dd {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #3a3a3a;
+}
+.causes-list__row dd a {
+  color: var(--accent-deep);
+  text-decoration: underline;
+  text-decoration-color: rgba(160, 129, 77, 0.4);
+  text-underline-offset: 3px;
+}
+.causes-list__row dd a:hover { text-decoration-color: var(--accent-deep); }
+@media (max-width: 760px) {
+  .causes-list__row { grid-template-columns: 1fr; gap: var(--s-2); padding: var(--s-5) 0; }
+}
+
+/* The forms depression takes — grouped subtype cards ----- */
+.depression-forms {
+  margin-top: var(--s-7);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(24px, 3vw, 40px);
+}
+.depression-form {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  padding: clamp(24px, 2.5vw, 36px);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+.depression-form__title {
+  margin: 0 0 var(--s-3);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: 1.25rem;
+  letter-spacing: -0.005em;
+  color: var(--primary);
+  line-height: 1.2;
+}
+.depression-form__tags {
+  margin: 0 0 var(--s-4);
+  font-family: var(--font-heading);
+  font-size: .75rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.depression-form__tags strong {
+  color: var(--accent-deep);
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-right: var(--s-2);
+}
+.depression-form p:not(.depression-form__tags) {
+  margin: 0;
+  font-size: .9375rem;
+  line-height: 1.65;
+  color: #3a3a3a;
+}
+@media (max-width: 760px) {
+  .depression-forms { grid-template-columns: 1fr; }
+}
+
+/* Treatment narrative — phased editorial ----------------- */
+.treatment-narrative {
+  margin-top: var(--s-7);
+  display: grid;
+  gap: var(--s-8);
+}
+.treatment-phase {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: clamp(28px, 4vw, 64px);
+  align-items: start;
+  padding-bottom: var(--s-7);
+  border-bottom: 1px solid var(--border);
+}
+.treatment-phase:last-child { border-bottom: 0; padding-bottom: 0; }
+.treatment-phase__head {
+  position: sticky;
+  top: 100px;
+}
+.treatment-phase__phase {
+  margin: 0 0 var(--s-3);
+  font-family: var(--font-heading);
+  font-size: clamp(1.125rem, 1.6vw + .5rem, 1.5rem);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  color: var(--primary);
+  line-height: 1.2;
+}
+.treatment-phase__detail {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: .6875rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  line-height: 1.6;
+}
+.treatment-phase__body p {
+  margin: 0 0 var(--s-4);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: #3a3a3a;
+}
+.treatment-phase__body p:last-child { margin-bottom: 0; }
+.treatment-phase__body strong { color: var(--primary); font-weight: 400; }
+@media (max-width: 900px) {
+  .treatment-phase { grid-template-columns: 1fr; gap: var(--s-4); }
+  .treatment-phase__head { position: static; }
+}
+
+/* Helping a loved one — numbered list of tips ------------ */
+.helping-list {
+  margin: var(--s-7) 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: helping;
+  display: grid;
+  gap: var(--s-6);
+}
+.helping-list li {
+  counter-increment: helping;
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: clamp(20px, 2.5vw, 40px);
+  align-items: baseline;
+}
+.helping-list li::before {
+  content: counter(helping, decimal-leading-zero);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.helping-list h3 {
+  margin: 0 0 var(--s-3);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: 1.1875rem;
+  letter-spacing: -0.005em;
+  color: var(--primary);
+  line-height: 1.2;
+}
+.helping-list p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #3a3a3a;
+  max-width: 68ch;
+}
+@media (max-width: 760px) {
+  .helping-list li { grid-template-columns: 1fr; gap: var(--s-2); }
+}
+
+/* Healthy ways to talk — try-saying / try-to-avoid grid -- */
+.talk-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 3vw, 48px);
+  margin-top: var(--s-7);
+}
+.talk-card {
+  padding: clamp(28px, 3vw, 40px);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+.talk-card--good {
+  background: #FBF6EC;
+  border-color: rgba(201, 165, 116, 0.4);
+}
+.talk-card--avoid {
+  background: var(--surface);
+  border-color: var(--border);
+  opacity: .92;
+}
+.talk-card__label {
+  margin: 0 0 var(--s-5);
+  font-family: var(--font-heading);
+  font-size: .75rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.talk-card--avoid .talk-card__label { color: var(--muted); }
+.talk-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-4);
+}
+.talk-card li {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--primary);
+  font-style: italic;
+}
+.talk-card--avoid li {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: rgba(107, 114, 128, 0.4);
+  text-decoration-thickness: 1px;
+}
+.talk-footnote {
+  margin: var(--s-7) 0 0;
+  padding: var(--s-5);
+  background: var(--paper);
+  border-left: 3px solid var(--accent);
+  font-size: .9375rem;
+  line-height: 1.65;
+  color: #3a3a3a;
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+}
+.talk-footnote strong { color: var(--primary); font-weight: 400; }
+@media (max-width: 760px) {
+  .talk-grid { grid-template-columns: 1fr; }
+}
+
+/* "You don't have to face it alone" — reassurance block -- */
+.alone-block {
+  max-width: 760px;
+  text-align: center;
+  display: grid;
+  gap: var(--s-5);
+  justify-items: center;
+}
+.alone-block .section-eyebrow { justify-self: center; }
+.alone-block__title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+  line-height: 1.1;
+  letter-spacing: -0.008em;
+  color: var(--primary);
+  max-width: 22ch;
+}
+.alone-block__body {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: #3a3a3a;
+  max-width: 56ch;
+}
+.alone-block__cta { margin-top: var(--s-4); }
+
+/* ============================================================
+   22. BIPOLAR PAGE — src/conditions/bipolar-disorder.html
+   Section components — none shared with depression/anxiety:
+     .bipolar-hero               — 2-col hero w/ navigational TOC aside
+     .bipolar-types-compare      — 3-way clinical comparison (I/II/cyclothymia)
+     .episodes-grid              — 2x2 mood-episode grid
+     .med-table                  — medication overview rows
+     .bipolar-modalities         — definition-list of bipolar-specific therapies
+     .rhythm-pillars             — 4-col lifestyle pillars
+     .phase-grid                 — 2-col manic/depressive family considerations
+   ============================================================ */
+
+/* Shared title + lede primitives for bipolar sections ---- */
+.bipolar-section-title {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  line-height: 1.06;
+  letter-spacing: -0.008em;
+  color: var(--primary);
+  margin: 0 0 var(--s-5);
+  max-width: 22ch;
+  text-wrap: balance;
+}
+.bipolar-section-lede {
+  font-size: clamp(1.0625rem, 0.5vw + 1rem, 1.1875rem);
+  line-height: 1.7;
+  color: #3a3a3a;
+  max-width: 64ch;
+  margin: 0 0 var(--s-8);
+}
+
+/* HERO — 2-col w/ TOC sidebar (navigational, not stat or quote) - */
+.bipolar-hero {
+  padding: clamp(48px, 7vh, 96px) 0 clamp(56px, 8vh, 104px);
+  background: var(--bg);
+}
+.bipolar-hero__grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: clamp(40px, 6vw, 96px);
+  align-items: start;
+}
+.bipolar-hero__primary { max-width: 720px; padding-top: var(--s-3); }
+.bipolar-hero__title {
+  margin: var(--s-3) 0 var(--s-5);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: clamp(2.25rem, 5.2vw, 4.25rem);
+  line-height: 1.04;
+  letter-spacing: -0.012em;
+  color: var(--primary);
+  max-width: 18ch;
+}
+.bipolar-hero__lede {
+  font-size: clamp(1.0625rem, 0.5vw + 1rem, 1.25rem);
+  line-height: 1.6;
+  color: #3a3a3a;
+  max-width: 56ch;
+  margin-bottom: var(--s-7);
+}
+/* Navigational sidebar: paper background, numbered list, internal anchors */
+.bipolar-hero__toc {
+  padding: var(--s-7) var(--s-6);
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  position: sticky;
+  top: 100px;
+}
+.bipolar-hero__toc-label {
+  margin: 0 0 var(--s-5);
+  font-family: var(--font-heading);
+  font-size: .6875rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.bipolar-hero__toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: toc;
+  display: grid;
+  gap: var(--s-3);
+}
+.bipolar-hero__toc-list li {
+  counter-increment: toc;
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  align-items: baseline;
+  gap: var(--s-2);
+  padding-bottom: var(--s-3);
+  border-bottom: 1px solid var(--border);
+}
+.bipolar-hero__toc-list li:last-child { border-bottom: 0; padding-bottom: 0; }
+.bipolar-hero__toc-list li::before {
+  content: counter(toc, decimal-leading-zero);
+  font-family: var(--font-heading);
+  font-size: .6875rem;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.bipolar-hero__toc-list a {
+  font-family: var(--font-heading);
+  font-size: .875rem;
+  line-height: 1.4;
+  color: var(--primary);
+  text-decoration: none;
+  letter-spacing: -0.003em;
+  transition: color 200ms ease, padding-left 200ms ease;
+}
+.bipolar-hero__toc-list a:hover {
+  color: var(--accent-deep);
+  padding-left: var(--s-1);
+}
+@media (max-width: 900px) {
+  .bipolar-hero__grid { grid-template-columns: 1fr; gap: var(--s-7); }
+  .bipolar-hero__toc { position: static; }
+}
+
+/* 3-way clinical comparison (Bipolar I / II / Cyclothymia) - */
+.bipolar-types-compare {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 2vw, 32px);
+  margin-top: var(--s-7);
+}
+.bipolar-type {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: clamp(28px, 3vw, 40px);
+  border-radius: var(--radius-lg);
+  display: grid;
+  gap: var(--s-4);
+  position: relative;
+  transition: transform 280ms ease, box-shadow 280ms ease;
+}
+.bipolar-type:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.bipolar-type--featured {
+  background: var(--paper);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-sm);
+}
+.bipolar-type__label {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: .6875rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.bipolar-type__title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: 1.125rem;
+  letter-spacing: -0.003em;
+  color: var(--primary);
+  line-height: 1.25;
+}
+.bipolar-type__facts {
+  margin: 0;
+  padding: var(--s-4) 0 0;
+  border-top: 1px solid var(--border);
+  display: grid;
+  gap: var(--s-4);
+}
+.bipolar-type__facts > div { display: grid; gap: var(--s-1); }
+.bipolar-type__facts dt {
+  font-family: var(--font-heading);
+  font-size: .625rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0;
+}
+.bipolar-type__facts dd {
+  margin: 0;
+  font-size: .9375rem;
+  line-height: 1.55;
+  color: #3a3a3a;
+}
+@media (max-width: 900px) {
+  .bipolar-types-compare { grid-template-columns: 1fr; gap: var(--s-5); }
+}
+
+/* 2x2 mood-episode grid -------------------------------------- */
+.episodes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(20px, 2.5vw, 32px);
+  margin-top: var(--s-7);
+}
+.episode-card {
+  padding: clamp(28px, 3vw, 40px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+.episode-card__type {
+  margin: 0 0 var(--s-2);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: clamp(1.25rem, 1.8vw + .5rem, 1.625rem);
+  letter-spacing: -0.005em;
+  color: var(--primary);
+  line-height: 1.15;
+}
+.episode-card__duration {
+  margin: 0 0 var(--s-4);
+  font-family: var(--font-heading);
+  font-size: .6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.episode-card__body {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #3a3a3a;
+}
+.episode-card__body a {
+  color: var(--accent-deep);
+  text-decoration: underline;
+  text-decoration-color: rgba(160, 129, 77, 0.4);
+  text-underline-offset: 3px;
+}
+.episode-card__body a:hover { text-decoration-color: var(--accent-deep); }
+@media (max-width: 760px) {
+  .episodes-grid { grid-template-columns: 1fr; }
+}
+
+/* Medication table -------------------------------------------- */
+.med-table {
+  margin-top: var(--s-7);
+  display: grid;
+  gap: 0;
+}
+.med-row {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: clamp(28px, 4vw, 56px);
+  padding: var(--s-5) 0;
+  border-top: 1px solid var(--border);
+  align-items: baseline;
+}
+.med-row:last-child { border-bottom: 1px solid var(--border); }
+.med-row__name {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.0625rem;
+  letter-spacing: -0.005em;
+  color: var(--primary);
+}
+.med-row__role {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #3a3a3a;
+}
+.med-footnote {
+  margin: var(--s-6) 0 0;
+  padding: var(--s-4) var(--s-5);
+  background: var(--surface);
+  border-left: 2px solid var(--accent);
+  font-size: .875rem;
+  line-height: 1.65;
+  color: var(--muted);
+  font-style: italic;
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+}
+@media (max-width: 760px) {
+  .med-row { grid-template-columns: 1fr; gap: var(--s-2); padding: var(--s-5) 0; }
+}
+
+/* Bipolar modalities — definition list ------------------------ */
+.bipolar-modalities {
+  margin: var(--s-6) 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+.bipolar-modalities__row {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: clamp(28px, 4vw, 56px);
+  padding: var(--s-5) 0;
+  border-top: 1px solid var(--border);
+  align-items: baseline;
+}
+.bipolar-modalities__row:last-child { border-bottom: 1px solid var(--border); }
+.bipolar-modalities__row dt {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.0625rem;
+  letter-spacing: -0.003em;
+  color: var(--primary);
+}
+.bipolar-modalities__row dd {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #3a3a3a;
+}
+@media (max-width: 760px) {
+  .bipolar-modalities__row { grid-template-columns: 1fr; gap: var(--s-2); padding: var(--s-5) 0; }
+}
+
+/* Rhythm pillars (sleep/light/social/substance) -------------- */
+.rhythm-pillars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(20px, 2vw, 32px);
+  margin-top: var(--s-7);
+}
+.rhythm-pillar {
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--accent);
+}
+.rhythm-pillar__num {
+  margin: 0 0 var(--s-3);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.rhythm-pillar h3 {
+  margin: 0 0 var(--s-3);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: 1.0625rem;
+  letter-spacing: -0.003em;
+  color: var(--primary);
+  line-height: 1.25;
+}
+.rhythm-pillar p {
+  margin: 0;
+  font-size: .9375rem;
+  line-height: 1.65;
+  color: #3a3a3a;
+}
+@media (max-width: 900px) { .rhythm-pillars { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .rhythm-pillars { grid-template-columns: 1fr; } }
+
+/* Phase grid — manic vs depressive family considerations ---- */
+.phase-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 3vw, 48px);
+  margin-top: var(--s-7);
+}
+.phase-card {
+  padding: clamp(28px, 3vw, 40px);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.phase-card--mania { border-top: 3px solid var(--accent); }
+.phase-card--depression { border-top: 3px solid var(--secondary); }
+.phase-card__label {
+  margin: 0 0 var(--s-5);
+  font-family: var(--font-heading);
+  font-size: .75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.phase-card--depression .phase-card__label { color: #3d6580; }
+.phase-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-4);
+}
+.phase-card li {
+  padding-left: var(--s-5);
+  position: relative;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #3a3a3a;
+}
+.phase-card--mania li::before {
+  content: "+";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 600;
+}
+.phase-card--depression li::before {
+  content: "−";
+  position: absolute;
+  left: 0;
+  color: var(--secondary);
+  font-weight: 600;
+}
+@media (max-width: 760px) {
+  .phase-grid { grid-template-columns: 1fr; gap: var(--s-5); }
+}
+
+/* ============================================================
+   23. INSURANCE VARIANTS — distinct per condition page
+   - .insurance-card   (anxiety):    bordered stacked card
+   - .insurance-split + .insurance-chips (depression): 2-col w/ chip grid
+   - .coverage-table + .coverage-carriers (bipolar): coverage rows
+   ============================================================ */
+
+/* ANXIETY — bordered insurance card ---------------------- */
+.insurance-card {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(40px, 5vw, 64px);
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  display: grid;
+  gap: var(--s-4);
+  box-shadow: var(--shadow-sm);
+}
+.insurance-card__eyebrow {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: .6875rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.insurance-card__title {
+  margin: 0 0 var(--s-2);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.005em;
+  color: var(--primary);
+  max-width: 22ch;
+}
+.insurance-card__body {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: #3a3a3a;
+}
+.insurance-card__note {
+  margin: 0;
+  padding: var(--s-4) var(--s-5);
+  background: var(--surface);
+  border-left: 2px solid var(--accent);
+  font-size: .9375rem;
+  line-height: 1.55;
+  color: var(--muted);
+  font-style: italic;
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+}
+.insurance-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  margin-top: var(--s-3);
+}
+
+/* DEPRESSION — 2-col split w/ carrier chips -------------- */
+.insurance-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 5vw, 80px);
+  align-items: start;
+}
+.insurance-split__intro p {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: #3a3a3a;
+  max-width: 48ch;
+  margin-bottom: var(--s-5);
+}
+.insurance-split__cta { margin-top: var(--s-3); }
+
+.insurance-chips {
+  padding: var(--s-6);
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  display: grid;
+  gap: var(--s-5);
+}
+.insurance-chips__label {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: .6875rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.insurance-chips__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+.insurance-chips__list li {
+  padding: var(--s-2) var(--s-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-family: var(--font-heading);
+  font-size: .75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary);
+  line-height: 1.4;
+  transition: border-color 200ms ease, color 200ms ease, background 200ms ease;
+}
+.insurance-chips__list li:hover {
+  border-color: var(--accent);
+  color: var(--accent-deep);
+  background: #FBF6EC;
+}
+.insurance-chips__footnote {
+  margin: 0;
+  font-size: .875rem;
+  line-height: 1.55;
+  color: var(--muted);
+  font-style: italic;
+}
+@media (max-width: 900px) {
+  .insurance-split { grid-template-columns: 1fr; gap: var(--s-6); }
+}
+
+/* BIPOLAR — coverage-by-LOC table + carrier line --------- */
+.coverage-table {
+  margin: var(--s-7) 0 var(--s-6);
+  display: grid;
+  gap: 0;
+}
+.coverage-table__row {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: clamp(28px, 4vw, 64px);
+  padding: var(--s-5) 0;
+  border-top: 1px solid var(--border);
+  align-items: baseline;
+}
+.coverage-table__row:last-child { border-bottom: 1px solid var(--border); }
+.coverage-table__row--head {
+  border-top: 2px solid var(--accent);
+  border-bottom: 1px solid var(--border);
+  padding: var(--s-3) 0;
+}
+.coverage-table__row--head span {
+  font-family: var(--font-heading);
+  font-size: .6875rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.coverage-table__row > span:first-child {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.0625rem;
+  letter-spacing: -0.003em;
+  color: var(--primary);
+}
+.coverage-table__row > span:last-child {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #3a3a3a;
+}
+.coverage-table__detail {
+  display: inline-block;
+  margin-top: var(--s-1);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: .6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.coverage-carriers {
+  margin: var(--s-6) 0 var(--s-6);
+  padding: var(--s-5) var(--s-6);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #3a3a3a;
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+}
+.coverage-carriers strong {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: .6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  margin-right: var(--s-3);
+  display: inline-block;
+}
+.coverage-cta { margin-top: var(--s-3); }
+@media (max-width: 760px) {
+  .coverage-table__row { grid-template-columns: 1fr; gap: var(--s-2); padding: var(--s-5) 0; }
+  .coverage-table__row--head { display: none; }
 }
