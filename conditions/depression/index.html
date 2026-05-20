@@ -27,7 +27,7 @@
   <meta name="theme-color" content="#1f3a5f">
   <link rel="icon" type="image/svg+xml" href="../../images/logo.svg">
 
-  <link rel="stylesheet" href="../../css/styles.min.css?v=29">
+  <link rel="stylesheet" href="../../css/styles.min.css?v=67">
 
 
   <script type="application/ld+json">
@@ -153,15 +153,15 @@
               </span>
             </a>
             <ul class="nav-dropdown" id="conditions-menu" aria-label="Conditions we treat">
-              <li><a href="../../index.html#conditions">Anxiety</a></li>
-              <li><a href="../../index.html#conditions">Depression</a></li>
-              <li><a href="../../index.html#conditions">Bipolar Disorder</a></li>
-              <li><a href="../../index.html#conditions">OCD</a></li>
-              <li><a href="../../index.html#conditions">Veteran PTSD</a></li>
-              <li><a href="../../index.html#conditions">Schizophrenia</a></li>
-              <li><a href="../../index.html#conditions">Self-Harm</a></li>
-              <li><a href="../../index.html#conditions">Social Anxiety</a></li>
-              <li><a href="../../index.html#conditions">Psychosis</a></li>
+              <li><a href="../../conditions/anxiety/">Anxiety</a></li>
+              <li><a href="../../conditions/depression/">Depression</a></li>
+              <li><a href="../../conditions/bipolar-disorder/">Bipolar Disorder</a></li>
+              <li><a href="../../conditions/ocd/">OCD</a></li>
+              <li><a href="../../conditions/veteran-ptsd/">Veteran PTSD</a></li>
+              <li><a href="../../conditions/schizophrenia/">Schizophrenia</a></li>
+              <li><a href="../../conditions/self-harm/">Self-Harm</a></li>
+              <li><a href="../../conditions/social-anxiety/">Social Anxiety</a></li>
+              <li><a href="../../conditions/psychosis/">Psychosis</a></li>
               <li><a href="../../index.html#conditions">Trauma &amp; PTSD</a></li>
               <li><a href="../../index.html#conditions">Suicidal Ideation</a></li>
             </ul>
@@ -213,7 +213,7 @@
     <!-- SYMPTOMS, organized by category (not a flat list) ------------ -->
     <section class="section section--surface" aria-labelledby="symptoms-title">
       <div class="container">
-        <p class="section-eyebrow">How depression presents</p>
+        <p class="section-eyebrow">Different forms of depression</p>
         <h2 id="symptoms-title" class="depression-section-title">Common symptoms of clinical depression</h2>
         <p class="depression-section-lede">Depression rarely shows up the same way twice. Some adults describe it as sadness; many do not. What unifies the diagnosis is a cluster of symptoms across mood, body, and thinking that persists for two weeks or longer and starts to interfere with daily life.</p>
 
@@ -257,10 +257,12 @@
     <!-- WHAT CAUSES DEPRESSION (depression-specific, no anxiety parallel) -->
     <section class="section" aria-labelledby="causes-title">
       <div class="container condition-prose">
-        <p class="section-eyebrow">What drives it</p>
-        <h2 id="causes-title" class="depression-section-title">What causes depression?</h2>
-        <!-- TODO before launch: clinical sign-off (Dr. Christian Small), risk-factor language -->
-        <p>Depression rarely has a single cause. Most adults we admit are carrying several risk factors layered together, some inherited, some environmental, some medical, some all three at once. Naming what is driving it is the first step toward treating it.</p>
+        <div class="ptsd-section-header--center">
+          <p class="section-eyebrow">What drives it</p>
+          <h2 id="causes-title" class="depression-section-title">What causes depression?</h2>
+          <!-- TODO before launch: clinical sign-off (Dr. Christian Small), risk-factor language -->
+          <p>Depression rarely has a single cause. Most adults we admit are carrying several risk factors layered together, some inherited, some environmental, some medical, some all three at once. Naming what is driving it is the first step toward treating it.</p>
+        </div>
 
         <dl class="causes-list">
           <div class="causes-list__row">
@@ -281,30 +283,17 @@
           </div>
           <div class="causes-list__row">
             <dt>Co-occurring</dt>
-            <dd>Substance use, untreated <a href="../../conditions/anxiety/">anxiety</a>, post-traumatic stress, eating disorders, ADHD. Roughly half of the adults we treat for depression carry a second active condition.</dd>
+            <dd>Substance use, untreated <a href="../../conditions/anxiety/">anxiety</a>, <a href="../../conditions/veteran-ptsd/">post-traumatic stress</a>, eating disorders, ADHD. Roughly half of the adults we treat for depression carry a second active condition.</dd>
           </div>
         </dl>
-      </div>
-    </section>
-
-    <!-- TREATMENT-RESISTANT DEPRESSION (dark spine, kept) ------------- -->
-    <section class="depression-callout" aria-labelledby="trd-title">
-      <div class="container depression-callout__inner">
-        <p class="depression-callout__eyebrow">When the medications haven't worked</p>
-        <h2 id="trd-title" class="depression-callout__title">Treatment-resistant depression is the cohort we built this for.</h2>
-        <p class="depression-callout__body">Clinically defined as depression that has not responded to at least two appropriate medication trials, treatment-resistant depression is one of the most common reasons adults end up in residential and PHP-level care. The answer is rarely a fourth medication tried in isolation. It is daily psychiatric contact with Dr. Christian Small, MD, evidence-based therapy delivered five days a week, and the small, consistent staff to do it with. That combination is what changes the trajectory.</p>
-        <a class="depression-callout__cta" href="tel:+18664604462">
-          <span>Talk to admissions</span>
-          <span aria-hidden="true">&rarr;</span>
-        </a>
       </div>
     </section>
 
     <!-- THE FORMS DEPRESSION TAKES, grouped by pattern, not subtype list -->
     <section class="section" aria-labelledby="forms-title">
       <div class="container">
-        <p class="section-eyebrow">The presentations we see</p>
-        <h2 id="forms-title" class="depression-section-title">The forms clinical depression takes in adults</h2>
+        <p class="section-eyebrow">Clinical depression categories</p>
+        <h2 id="forms-title" class="depression-section-title">How clinical depression takes place in adults</h2>
         <p class="depression-section-lede">Diagnostic manuals divide depression into discrete categories. In practice, the more useful distinction is the <em>pattern</em>, how the depression came on, what tends to drive it, and what treatment that pattern responds to.</p>
 
         <div class="depression-forms">
@@ -350,45 +339,79 @@
     </section>
 
     <!-- WHAT TREATMENT LOOKS LIKE, narrative, not LOC cards ---------- -->
+    <!-- IMPACT ON DAILY LIFE ------------------------------------------- -->
+    <section class="section" aria-labelledby="impact-title">
+      <div class="container">
+        <p class="section-eyebrow">The impact of depression</p>
+        <h2 id="impact-title" class="depression-section-title">How untreated depression affects daily life</h2>
+        <p class="depression-section-lede">Depression looks different for everyone, but it rarely stays still. Left untreated, it tends to reach into work, relationships, physical health, and the inner sense of who a person is. Recognizing where it has already shown up is often the first step toward getting help.</p>
+
+        <!-- TODO before launch: clinical sign-off (Dr. Christian Small) -->
+        <div class="depression-impact">
+
+          <article class="depression-impact__row">
+            <h3 class="depression-impact__label">Work and identity</h3>
+            <p>For many adults, concentration is one of the first things to slip, and productivity often follows. Work that used to feel ordinary can start to take longer and feel heavier. Over months, this can show up in performance reviews, promotion timing, and a quieter internal sense of being less competent. Many adults with untreated depression describe a private shame about the gap between what they could be doing and what they are. Not everyone experiences this the same way.</p>
+          </article>
+
+          <article class="depression-impact__row">
+            <h3 class="depression-impact__label">Relationships and family</h3>
+            <p>For many people, depression can flatten the warmth that close relationships run on. That often looks like becoming harder to reach, harder to plan with, and less responsive to the ordinary affection that used to feel like air. Partners and children may notice the change even when they cannot name it. The strain tends to compound quietly, and the longer it sits, the more time repair can take. How much shows up at home varies from person to person.</p>
+          </article>
+
+          <article class="depression-impact__row">
+            <h3 class="depression-impact__label">Physical health</h3>
+            <p>Depression is rarely just in the head. Sleep can be disrupted, appetite can shift in either direction, movement often falls off, and pain perception may sharpen. The combination of symptoms looks different for everyone. In adults with chronic untreated depression, the long-term risk of cardiovascular disease, diabetes, and stroke is meaningfully higher at the population level. The body tends to pay for the mental state.</p>
+          </article>
+
+          <article class="depression-impact__row">
+            <h3 class="depression-impact__label">Safety and suicidality</h3>
+            <p>For adults with untreated depression, the risk of suicidal thoughts and attempts is meaningfully higher than in the general population. Not everyone experiences this, but it is the cost no other line item compares with, and the reason real treatment matters. If you or someone you love is in danger now, call <strong>988</strong>, the Suicide and Crisis Lifeline.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
     <section class="section section--surface" aria-labelledby="treatment-title">
       <div class="container">
         <p class="section-eyebrow">What treatment looks like</p>
-        <h2 id="treatment-title" class="depression-section-title">A day, a week, a stay at Mental Wellness KS.</h2>
-        <p class="depression-section-lede">Most adults arrive at residential and stay 30 to 45 days, then step down through partial hospitalization (PHP) and intensive outpatient (IOP) over the following 6 to 12 weeks. Below is what each of those phases actually contains, not a brochure description.</p>
+        <h2 id="treatment-title" class="depression-section-title">Three levels of depression treatment we provide</h2>
+        <p class="depression-section-lede">Mental Wellness KS offers three levels of depression treatment for adults at our Palm Springs program: residential, partial hospitalization (PHP), and intensive outpatient (IOP). The right level depends on the severity of symptoms, the support already in place, and what each day looks like. Our clinical team recommends the level that fits, and clients can move between levels of care as their needs change.</p>
 
+        <!-- TODO before launch: clinical sign-off (Dr. Christian Small) -->
         <div class="treatment-narrative">
 
           <article class="treatment-phase">
             <header class="treatment-phase__head">
-              <p class="treatment-phase__phase">Phase 01 &middot; Residential</p>
+              <h3 class="treatment-phase__phase">Residential depression treatment</h3>
               <p class="treatment-phase__detail">24-hour care &middot; 30&ndash;45 days &middot; up to 12 adults in residence</p>
             </header>
             <div class="treatment-phase__body">
-              <p>You sleep at the house, a private single-family home in Palm Springs, not a hospital. A psychiatric evaluation with <strong>Dr. Christian Small, MD</strong> happens in the first 24 hours; medications are reviewed and, where appropriate, adjusted. Sleep, nutrition, and basic safety are stabilized first.</p>
-              <p>The therapeutic week starts in earnest by day two: individual therapy with your primary therapist, group programming five days a week, family sessions when the client is ready, and daily clinical contact with the psychiatric team. The modalities are evidence-based: <strong>CBT, behavioral activation, DBT skills, EMDR, and Cognitive Processing Therapy</strong> for trauma-rooted presentations.</p>
-              <p>This is the phase where the work happens, not because of any single intervention, but because the medication, the therapy, and the structure are all running at the same time, in the same building, by people who see you every day.</p>
+              <p>Residential depression treatment is typically the right level when symptoms make daily functioning difficult, when 24-hour clinical contact is needed, or when a medication regimen needs daily psychiatric supervision while it stabilizes. Clients sleep at the house, a private single-family home in Palm Springs, not a hospital. A psychiatric evaluation with <strong>Dr. Christian Small, MD</strong> happens in the first 24 hours; medications are reviewed and, where appropriate, adjusted.</p>
+              <p>The clinical week includes individual therapy with a primary therapist, group programming five days a week, family sessions when the client is ready, and daily contact with the psychiatric team. The modalities are evidence-based: <strong>CBT, behavioral activation, DBT skills, EMDR, and Cognitive Processing Therapy</strong> for trauma-rooted presentations. The medication work, the therapy, and the structure all run in the same building, by the same small team.</p>
             </div>
           </article>
 
           <article class="treatment-phase">
             <header class="treatment-phase__head">
-              <p class="treatment-phase__phase">Phase 02 &middot; Partial Hospitalization (PHP)</p>
+              <h3 class="treatment-phase__phase">Partial Hospitalization Program (PHP) for depression</h3>
               <p class="treatment-phase__detail">Mon&ndash;Fri &middot; 8 AM &ndash; 3 PM &middot; 6&ndash;12 weeks, typical</p>
             </header>
             <div class="treatment-phase__body">
-              <p>Six hours of structured clinical programming, five days a week, with evenings and weekends spent at home or in our supportive housing. The clinical content carries forward from residential: continued psychotherapy, ongoing psychiatric oversight, group, and family work.</p>
-              <p>What changes is the texture of the day. You start re-encountering ordinary life, meals at home, evenings with family, sleep in your own bed, while still spending the working day in treatment. For many clients this is where the gains from residential actually consolidate.</p>
+              <p>A partial hospitalization program for depression is often the right level for clients who can sleep safely at home or in supportive housing but still need full clinical days. Six hours of structured programming, five days a week, with evenings and weekends spent outside the clinical setting.</p>
+              <p>The clinical content holds the same intensity as residential: continued psychotherapy, ongoing psychiatric oversight, group, and family work. The day is structured, and the home routine resumes around it. Some clients start at PHP; others arrive here after residential.</p>
             </div>
           </article>
 
           <article class="treatment-phase">
             <header class="treatment-phase__head">
-              <p class="treatment-phase__phase">Phase 03 &middot; Intensive Outpatient (IOP)</p>
+              <h3 class="treatment-phase__phase">Intensive Outpatient Program (IOP) for depression</h3>
               <p class="treatment-phase__detail">Mon&ndash;Fri &middot; morning or afternoon track &middot; 6&ndash;12 weeks, typical</p>
             </header>
             <div class="treatment-phase__body">
-              <p>Three hours a day, five days a week, on a morning (8&ndash;11) or afternoon (12&ndash;3) schedule. The right level when you are re-engaging with work, school, or family responsibilities and need to keep the clinical rhythm without losing the day.</p>
-              <p>The same primary therapist, the same psychiatric provider, the same peer group. Continuity of relationship across phases is one of the most under-discussed predictors of depression recovery, and we protect it deliberately.</p>
+              <p>An intensive outpatient program for depression is often the right level when clients are re-engaging with work, school, or family responsibilities and need to keep the clinical rhythm without losing the day. Three hours a day, five days a week, on a morning (8&ndash;11) or afternoon (12&ndash;3) schedule.</p>
+              <p>Whether a client starts at IOP or arrives here from a higher level of care, the same primary therapist, psychiatric provider, and peer group stay in place. Continuity of relationship is one of the most under-discussed predictors of depression recovery, and we protect it deliberately.</p>
             </div>
           </article>
 
@@ -399,9 +422,11 @@
     <!-- HEALTHY WAYS TO TALK ABOUT DEPRESSION (D'Amore-inspired, NEW) - -->
     <section class="section" aria-labelledby="talk-title">
       <div class="container">
-        <p class="section-eyebrow">Scripts that work</p>
-        <h2 id="talk-title" class="depression-section-title">Healthy ways to talk about depression</h2>
-        <p class="depression-section-lede">The right phrase at the wrong moment lands wrong. The right phrase at the right moment can change the trajectory. Below: things to say, things to avoid, and what the difference usually is.</p>
+        <div class="ptsd-section-header--center">
+          <p class="section-eyebrow">Talk about it</p>
+          <h2 id="talk-title" class="depression-section-title">Healthy ways to talk about depression</h2>
+          <p class="depression-section-lede">The right phrase at the right moment can change the trajectory. Below are phrases that tend to land well, and what to do if the conversation turns toward safety.</p>
+        </div>
 
         <div class="talk-grid">
 
@@ -416,20 +441,9 @@
             </ul>
           </article>
 
-          <article class="talk-card talk-card--avoid">
-            <p class="talk-card__label">Try to avoid</p>
-            <ul>
-              <li>&ldquo;You have so much to be grateful for.&rdquo;</li>
-              <li>&ldquo;Have you tried exercising? Eating better? Meditating?&rdquo;</li>
-              <li>&ldquo;Snap out of it, this isn't like you.&rdquo;</li>
-              <li>&ldquo;Other people have it worse.&rdquo;</li>
-              <li>&ldquo;You just need to think more positively.&rdquo;</li>
-            </ul>
-          </article>
-
         </div>
 
-        <p class="talk-footnote">If your loved one mentions thoughts of self-harm or suicide, take it seriously. Ask directly: &ldquo;Are you thinking about hurting yourself?&rdquo; The question does not put the thought there. It does open the door. Then call <strong>988</strong>, the national Suicide and Crisis Lifeline, or go to your nearest emergency room.</p>
+        <p class="talk-footnote">If your loved one mentions thoughts of <a href="../../conditions/self-harm/">self-harm</a> or suicide, take it seriously. Ask directly: &ldquo;Are you thinking about hurting yourself?&rdquo; The question does not put the thought there. It does open the door. Then call <strong>988</strong>, the national Suicide and Crisis Lifeline, or go to your nearest emergency room.</p>
       </div>
     </section>
 
@@ -448,10 +462,10 @@
     <section class="section" aria-labelledby="insurance-title">
       <div class="container insurance-split">
         <div class="insurance-split__intro">
-          <p class="section-eyebrow">Paying for care</p>
+          <p class="section-eyebrow">Insurance coverage</p>
           <h2 id="insurance-title" class="depression-section-title">Insurance for depression treatment.</h2>
           <p>Residential, PHP, and IOP for depression are covered by most commercial plans when medically necessary. We'll verify your benefits before any decisions need to be made, free and within minutes.</p>
-          <a class="btn btn-dark insurance-split__cta" href="../../index.html#insurance">Run my benefits</a>
+          <a class="btn btn-dark insurance-split__cta" href="../../index.html#insurance">Verify my benefits</a>
         </div>
         <aside class="insurance-chips" aria-label="Insurance carriers">
           <p class="insurance-chips__label">Currently in-network</p>
@@ -543,14 +557,21 @@
     <!-- CLOSING CTA --------------------------------------------------- -->
     <section class="section section--cta tour-close" aria-labelledby="close-title">
       <div class="container">
-        <p class="tour-close__eyebrow">Start the conversation</p>
-        <h2 id="close-title" class="tour-close__title">The hardest call is the one before treatment starts.</h2>
-        <p class="tour-close__body">If depression has stopped responding to outpatient therapy or medication trials, the next step is a phone call. A clinician answers. We'll talk about fit, walk through admissions and insurance, and, if it's the right match, schedule the next step the same week.</p>
-        <a class="cta-tel" href="tel:+18664604462">
-          <span class="cta-tel__label">Call admissions</span>
-          <span class="cta-tel__number">(866) 460-4462</span>
-        </a>
-        <p class="tour-close__address">947 N Cibola Cir &middot; Palm Springs, CA 92262</p>
+        <div class="tour-close__card">
+          <div class="tour-close__lead">
+            <p class="tour-close__eyebrow">Get in touch</p>
+            <h2 id="close-title" class="tour-close__title">You don't have to figure this out alone.</h2>
+            <p class="tour-close__body">Call our admissions team to talk through treatment options and find a safe place to start.</p>
+          </div>
+          <div class="tour-close__action">
+            <a class="tour-close__tel" href="tel:+18664604462">(866) 460-4462</a>
+            <a class="tour-close__btn" href="tel:+18664604462">
+              <span>Get help today</span>
+              <svg class="tour-close__btn-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+          <p class="tour-close__address">947 N Cibola Cir &middot; Palm Springs, CA 92262</p>
+        </div>
       </div>
     </section>
 
