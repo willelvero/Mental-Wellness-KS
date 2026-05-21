@@ -7339,6 +7339,291 @@ em     { font-style: italic; color: inherit; }
   .anx-causes__row { grid-template-columns: 1fr; gap: var(--s-2); padding: var(--s-4) 0; }
 }
 
+/* --- Anxiety landing page components ------------------------- */
+/* Hero subhead */
+.page-intro__sub {
+  margin: var(--s-3) 0 var(--s-4);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(1.0625rem, 0.6vw + 1rem, 1.375rem);
+  line-height: 1.35;
+  color: var(--accent-deep);
+  max-width: 32ch;
+}
+.page-intro__inner .page-intro__lede + .page-intro__lede { margin-top: var(--s-4); }
+
+/* Trust / admissions bar */
+.trust-bar { background: var(--primary); }
+.trust-bar__inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(20px, 3vw, 48px);
+  padding: clamp(28px, 3.5vw, 44px) 0;
+}
+.trust-bar__item {
+  display: grid;
+  gap: 6px;
+  border-left: 1px solid rgba(201, 165, 116, 0.32);
+  padding-left: clamp(16px, 1.6vw, 24px);
+}
+.trust-bar__lead {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: .8125rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.trust-bar__text {
+  margin: 0;
+  font-size: .9375rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.82);
+}
+@media (max-width: 820px) {
+  .trust-bar__inner { grid-template-columns: repeat(2, 1fr); row-gap: var(--s-5); }
+}
+@media (max-width: 480px) {
+  .trust-bar__inner { grid-template-columns: 1fr; }
+}
+
+/* Schedule / length-of-stay meta block (residential, PHP, IOP) */
+.loc-meta {
+  display: grid;
+  gap: var(--s-3);
+  margin: var(--s-6) 0 0;
+  padding: var(--s-4) var(--s-5);
+  background: var(--paper);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 5px 5px 0;
+}
+.loc-meta div {
+  display: flex;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+.loc-meta dt {
+  flex: 0 0 150px;
+  font-family: var(--font-heading);
+  font-size: .75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.loc-meta dd {
+  margin: 0;
+  flex: 1 1 200px;
+  font-size: .9375rem;
+  line-height: 1.5;
+  color: var(--primary);
+}
+
+/* Program-fit checklist */
+.fit-list {
+  list-style: none;
+  margin: var(--s-5) 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-3);
+}
+.fit-list li {
+  position: relative;
+  padding-left: 34px;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: #3a3a3a;
+}
+.fit-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.fit-list li::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 8px;
+  width: 8px;
+  height: 5px;
+  border-left: 1.5px solid #fff;
+  border-bottom: 1.5px solid #fff;
+  transform: rotate(-45deg);
+}
+.fit-list--screen li::before { background: var(--border); }
+.fit-list--screen li::after {
+  left: 5px;
+  top: 11px;
+  width: 10px;
+  height: 0;
+  border-left: 0;
+  border-bottom: 1.5px solid var(--muted);
+  transform: none;
+}
+.fit-list--cols {
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 1fr;
+  gap: var(--s-3) var(--s-6);
+}
+@media (max-width: 640px) {
+  .fit-list--cols { grid-template-columns: 1fr; }
+}
+
+/* --- Depression landing page components ---------------------- */
+/* Hero subhead */
+.depression-hero__sub {
+  margin: var(--s-3) 0 var(--s-4);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(1.0625rem, 0.6vw + 1rem, 1.3125rem);
+  line-height: 1.35;
+  color: var(--accent-deep);
+}
+.depression-hero__primary .depression-hero__lede + .depression-hero__lede { margin-top: var(--s-4); }
+
+/* Admissions & insurance support bar */
+.admissions-bar {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: start;
+}
+.admissions-bar__head .section-eyebrow { margin-bottom: var(--s-3); }
+.admissions-bar__head .depression-section-title { margin-bottom: var(--s-3); }
+.admissions-bar__head p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #3a3a3a;
+}
+.admissions-bar__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 1fr;
+  gap: var(--s-4) var(--s-5);
+}
+.admissions-bar__list li {
+  position: relative;
+  padding-left: 30px;
+  font-size: .9375rem;
+  line-height: 1.5;
+  color: #3a3a3a;
+}
+.admissions-bar__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.admissions-bar__list li::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 6px;
+  width: 7px;
+  height: 4px;
+  border-left: 1.5px solid #fff;
+  border-bottom: 1.5px solid #fff;
+  transform: rotate(-45deg);
+}
+@media (max-width: 860px) {
+  .admissions-bar { grid-template-columns: 1fr; gap: var(--s-6); }
+}
+@media (max-width: 540px) {
+  .admissions-bar__list { grid-template-columns: 1fr; }
+}
+
+/* Safety / crisis note */
+.safety-note {
+  margin-top: var(--s-6);
+  padding: var(--s-4) var(--s-5);
+  background: #fbeae6;
+  border-left: 3px solid #b4452c;
+  border-radius: 0 5px 5px 0;
+  font-size: .9375rem;
+  line-height: 1.65;
+  color: #3a3a3a;
+}
+.safety-note strong { color: #8f3621; }
+
+/* Inline descriptive CTA link */
+.inline-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-heading);
+  font-size: .9375rem;
+  letter-spacing: 0.02em;
+  color: var(--accent-deep);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(160, 129, 77, 0.4);
+  padding-bottom: 2px;
+  transition: color .2s ease, border-color .2s ease;
+}
+.inline-cta:hover,
+.inline-cta:focus-visible {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* --- Bipolar landing page components ------------------------- */
+/* Hero subhead */
+.bipolar-hero__sub {
+  margin: var(--s-3) 0 var(--s-4);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(1.0625rem, 0.6vw + 1rem, 1.3125rem);
+  line-height: 1.35;
+  color: var(--accent-deep);
+}
+.bipolar-hero__primary .bipolar-hero__lede + .bipolar-hero__lede { margin-top: var(--s-4); }
+
+/* Coordinated-care highlight points */
+.care-points {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-3);
+  margin-top: var(--s-6);
+}
+.care-point {
+  margin: 0;
+  padding: var(--s-4) var(--s-4) var(--s-4) var(--s-5);
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 5px 5px 0;
+  font-family: var(--font-heading);
+  font-size: .9375rem;
+  line-height: 1.45;
+  color: var(--primary);
+}
+@media (max-width: 820px) { .care-points { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .care-points { grid-template-columns: 1fr; } }
+
+/* --- OCD landing page ---------------------------------------- */
+.ocd-hero__sub {
+  margin: var(--s-3) 0 var(--s-5);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(1.0625rem, 0.6vw + 1rem, 1.3125rem);
+  line-height: 1.35;
+  color: var(--accent-deep);
+  max-width: 46ch;
+}
+.ocd-hero__inner .ocd-hero__lede:not(:last-of-type) { margin-bottom: var(--s-4); }
+
 /* Areas — small typographic block before closing CTA */
 .anx-areas {
   padding: clamp(40px, 5vh, 64px) 0 clamp(32px, 4vh, 48px);
@@ -8133,4 +8418,786 @@ em     { font-style: italic; color: inherit; }
   line-height: 1.7;
   color: #3a3a3a;
   max-width: 84ch;
+}
+
+/* ============================================================
+   31. VETERAN PTSD LANDING PAGE — src/veteran-ptsd-treatment-california.html
+   Migrated, conversion-focused rebuild. Reuses .ptsd-therapies,
+   .ptsd-experience, .ptsd-comorbid, .ptsd-coverage, .ptsd-areas
+   from section 25. New components below:
+   .vet-pillars (6 veteran-owned highlight cards),
+   .vet-symptoms (4 symptom-cluster cards w/ bulleted lists),
+   .vet-steps (2-col PHP / IOP step-down cards),
+   .vet-voices (supportive family-language quote grid).
+   ============================================================ */
+
+/* Section 2 — veteran-owned highlight cards */
+.vet-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 1.8vw, 24px);
+  margin: var(--s-7) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.vet-pillar {
+  position: relative;
+  padding: var(--s-5);
+  padding-left: calc(var(--s-5) + 32px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.0625rem;
+  line-height: 1.45;
+  letter-spacing: -0.003em;
+  color: var(--primary);
+  transition: border-color .25s ease, transform .25s cubic-bezier(.2,.7,.2,1);
+}
+.vet-pillar:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.vet-pillar::before {
+  content: "\2713";
+  position: absolute;
+  left: var(--s-5);
+  top: var(--s-5);
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  line-height: 1.45;
+  color: var(--accent-deep);
+}
+@media (max-width: 860px) {
+  .vet-pillars { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 540px) {
+  .vet-pillars { grid-template-columns: 1fr; }
+}
+
+/* Section 7 — symptom-cluster cards with bulleted lists */
+.vet-symptoms {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(20px, 2.4vw, 32px);
+  margin: var(--s-2) 0 0;
+}
+.vet-symptoms__group {
+  padding: clamp(24px, 2.4vw, 36px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.vet-symptoms__label {
+  margin: 0 0 var(--s-4);
+  padding-bottom: var(--s-3);
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.125rem;
+  letter-spacing: -0.003em;
+  color: var(--primary);
+}
+.vet-symptoms__group ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--s-2);
+}
+.vet-symptoms__group li {
+  position: relative;
+  padding-left: 20px;
+  font-size: .9375rem;
+  line-height: 1.6;
+  color: #3a3a3a;
+}
+.vet-symptoms__group li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 10px;
+  height: 1px;
+  background: var(--accent);
+}
+@media (max-width: 760px) {
+  .vet-symptoms { grid-template-columns: 1fr; }
+}
+
+/* Section 8 — PHP / IOP step-down cards */
+.vet-steps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(20px, 2.4vw, 32px);
+  margin: var(--s-2) 0 0;
+}
+.vet-step {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(24px, 2.6vw, 40px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+.vet-step__label {
+  margin: 0 0 var(--s-4);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  color: var(--primary);
+}
+.vet-step__meta {
+  margin: 0 0 var(--s-4);
+  display: grid;
+  gap: var(--s-2);
+  padding: var(--s-4) var(--s-5);
+  background: var(--paper);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 5px 5px 0;
+}
+.vet-step__meta div {
+  display: flex;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+.vet-step__meta dt {
+  flex: 0 0 96px;
+  font-family: var(--font-heading);
+  font-size: .75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.vet-step__meta dd {
+  margin: 0;
+  flex: 1 1 160px;
+  font-size: .9375rem;
+  line-height: 1.5;
+  color: var(--primary);
+}
+.vet-step__body {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #3a3a3a;
+}
+.vet-steps__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3) var(--s-7);
+  margin: var(--s-6) 0 0;
+}
+@media (max-width: 760px) {
+  .vet-steps { grid-template-columns: 1fr; }
+}
+
+/* Section 11 — supportive family-language quote grid */
+.vet-voices__intro {
+  margin: var(--s-6) 0 var(--s-5);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: #3a3a3a;
+  max-width: 760px;
+}
+.vet-voices {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 1.8vw, 24px);
+}
+.vet-voice {
+  position: relative;
+  padding: var(--s-5);
+  padding-left: calc(var(--s-5) + 26px);
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  font-style: italic;
+  color: var(--primary);
+}
+.vet-voice::before {
+  content: "\201C";
+  position: absolute;
+  left: var(--s-5);
+  top: calc(var(--s-5) - 2px);
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  line-height: 1;
+  color: var(--accent);
+}
+.vet-voice:last-child:nth-child(odd) { grid-column: 1 / -1; }
+
+/* Section 12 — coverage disclaimer line under .ptsd-coverage */
+.vet-coverage-note {
+  margin: var(--s-5) 0 var(--s-6);
+  font-size: .9375rem;
+  line-height: 1.65;
+  font-style: italic;
+  color: var(--muted);
+  max-width: 80ch;
+}
+@media (max-width: 640px) {
+  .vet-voices { grid-template-columns: 1fr; }
+  .vet-voice:last-child:nth-child(odd) { grid-column: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vet-pillar { transition: none; }
+}
+
+/* ============================================================
+   32. SCHIZOPHRENIA LANDING PAGE — src/schizophrenia-treatment-california.html
+   Migrated, conversion-focused rebuild. Reuses .sch-symptoms,
+   .sch-meds, .sch-comorbid, .sch-areas from section 26/30.
+   New components below:
+   .sch-pillars (6 left-rule highlight items),
+   .sch-steps (stacked PHP / IOP step-down rows),
+   .sch-warnings (relapse warning-sign grid),
+   .sch-insurance (dark navy panel w/ carrier chips — insurance variant 10).
+   ============================================================ */
+
+/* Section 2 — left-rule highlight items */
+.sch-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 1.6vw, 20px);
+  margin: var(--s-7) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.sch-pillar {
+  padding: var(--s-4) var(--s-5);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.0625rem;
+  line-height: 1.4;
+  letter-spacing: -0.003em;
+  color: var(--primary);
+  transition: border-left-color .25s ease, transform .25s cubic-bezier(.2,.7,.2,1);
+}
+.sch-pillar:hover {
+  border-left-color: var(--accent-deep);
+  transform: translateY(-2px);
+}
+@media (max-width: 860px) {
+  .sch-pillars { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 540px) {
+  .sch-pillars { grid-template-columns: 1fr; }
+}
+
+/* Section 9 — stacked PHP / IOP step-down rows */
+.sch-steps {
+  margin: var(--s-2) 0 0;
+  display: grid;
+  gap: 0;
+}
+.sch-step {
+  display: grid;
+  grid-template-columns: minmax(240px, 340px) 1fr;
+  gap: clamp(24px, 3.5vw, 64px);
+  padding: clamp(28px, 3vw, 44px) 0;
+  border-top: 1px solid var(--border);
+  align-items: start;
+}
+.sch-step:last-child { border-bottom: 1px solid var(--border); }
+.sch-step__label {
+  margin: 0 0 var(--s-4);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.1875rem;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+  color: var(--primary);
+}
+.sch-step__meta {
+  margin: 0;
+  display: grid;
+  gap: var(--s-2);
+}
+.sch-step__meta div {
+  display: flex;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+.sch-step__meta dt {
+  flex: 0 0 88px;
+  font-family: var(--font-heading);
+  font-size: .6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.sch-step__meta dd {
+  margin: 0;
+  flex: 1 1 160px;
+  font-size: .9375rem;
+  line-height: 1.5;
+  color: #3a3a3a;
+}
+.sch-step__body {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: #3a3a3a;
+}
+.sch-steps__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3) var(--s-7);
+  margin: var(--s-6) 0 0;
+}
+@media (max-width: 760px) {
+  .sch-step { grid-template-columns: 1fr; gap: var(--s-4); padding: var(--s-6) 0; }
+}
+
+/* Section 10 — relapse warning-sign grid */
+.sch-warnings__intro {
+  margin: var(--s-6) 0 var(--s-4);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: #3a3a3a;
+  max-width: 760px;
+}
+.sch-warnings {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(12px, 1.4vw, 18px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sch-warning {
+  padding: var(--s-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-deep);
+  border-radius: 0 5px 5px 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: .9375rem;
+  line-height: 1.45;
+  letter-spacing: -0.003em;
+  color: var(--primary);
+}
+@media (max-width: 900px) {
+  .sch-warnings { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .sch-warnings { grid-template-columns: 1fr; }
+}
+
+/* Section 12 — INSURANCE VARIANT 10 — dark navy panel w/ carrier chips.
+   Distinct from anxiety's light card, depression's 2-col chips,
+   bipolar's table, OCD's panels, PTSD's stacked bars, and the old
+   schizophrenia timeline (.sch-coverage). */
+.sch-insurance {
+  background: var(--primary);
+  border-radius: var(--radius-lg);
+  padding: clamp(32px, 4vw, 64px);
+  margin: var(--s-2) 0 0;
+}
+.sch-insurance__body {
+  margin: 0 0 var(--s-5);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 70ch;
+}
+.sch-insurance__carriers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-3);
+  margin: 0 0 var(--s-6);
+  padding: 0;
+  list-style: none;
+}
+.sch-insurance__carriers li {
+  padding: 8px 16px;
+  border: 1px solid rgba(201, 165, 116, 0.42);
+  border-radius: 999px;
+  font-family: var(--font-heading);
+  font-size: .8125rem;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+}
+.sch-insurance__note {
+  margin: 0 0 var(--s-6);
+  padding-top: var(--s-5);
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  font-size: .9375rem;
+  line-height: 1.65;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 72ch;
+}
+.sch-insurance__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+}
+.sch-insurance__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  border-radius: 5px;
+  font-family: var(--font-heading);
+  font-size: .9375rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  background: var(--accent);
+  color: var(--ink);
+  border: 1px solid var(--accent);
+  transition: background .25s ease, border-color .25s ease, color .25s ease, transform .2s ease;
+}
+.sch-insurance__btn:hover {
+  background: var(--accent-deep);
+  border-color: var(--accent-deep);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.sch-insurance__btn--outline {
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.sch-insurance__btn--outline:hover {
+  background: #fff;
+  color: var(--primary);
+  border-color: #fff;
+}
+@media (max-width: 540px) {
+  .sch-insurance__btn { width: 100%; }
+}
+
+/* Section 15 — areas-served paragraph spacing (.sch-areas reused from section 30) */
+.sch-areas__body + .sch-areas__body { margin-top: var(--s-3); }
+
+@media (prefers-reduced-motion: reduce) {
+  .sch-pillar { transition: none; }
+}
+
+/* ============================================================
+   33. ANXIETY LANDING PAGE — src/anxiety-treatment-california.html
+   Content rewrite. Reuses .condition-cards, .modality-list,
+   .fit-list, .insurance-card, .anx-areas, .safety-note.
+   New components below:
+   .anx-loc (levels-of-care comparison table),
+   .anx-checklist-title (sub-heading above the section 3 checklist).
+   ============================================================ */
+
+.anx-checklist-title {
+  margin: var(--s-8) 0 var(--s-5);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: clamp(1.25rem, 1vw + 1rem, 1.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.003em;
+  color: var(--primary);
+}
+
+/* Section 6 — levels-of-care comparison table */
+.anx-loc {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--s-2) 0 var(--s-7);
+  font-size: .9375rem;
+}
+.anx-loc thead th {
+  text-align: left;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: .6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  padding: 0 var(--s-4) var(--s-3) 0;
+  border-bottom: 2px solid var(--accent);
+}
+.anx-loc tbody tr { border-bottom: 1px solid var(--border); }
+.anx-loc tbody th {
+  text-align: left;
+  vertical-align: top;
+  width: 26%;
+  padding: var(--s-5) var(--s-4) var(--s-5) 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.0625rem;
+  line-height: 1.3;
+  letter-spacing: -0.003em;
+  color: var(--primary);
+}
+.anx-loc tbody td {
+  vertical-align: top;
+  padding: var(--s-5) var(--s-4) var(--s-5) 0;
+  line-height: 1.7;
+  color: #3a3a3a;
+}
+.anx-loc tbody td:first-of-type {
+  width: 26%;
+  font-style: italic;
+  color: var(--muted);
+}
+.anx-loc tbody td:last-child { padding-right: 0; }
+@media (max-width: 760px) {
+  .anx-loc, .anx-loc thead, .anx-loc tbody, .anx-loc tr, .anx-loc th, .anx-loc td {
+    display: block;
+    width: 100%;
+  }
+  .anx-loc thead { display: none; }
+  .anx-loc tbody tr { padding: var(--s-5) 0; }
+  .anx-loc tbody th { padding: 0 0 var(--s-3); }
+  .anx-loc tbody td { padding: 0 0 var(--s-2); }
+  .anx-loc tbody td:first-of-type { font-style: normal; color: var(--accent-deep); }
+}
+
+/* ============================================================
+   34. PSYCHOSIS LANDING PAGE — src/psychosis-treatment-california.html
+   Migrated, after-stabilization rebuild. Reuses .page-intro,
+   .trust-bar, .psy-episode, .psy-prodrome, .psy-causes,
+   .psy-coverage, .psy-areas, .psy-section-title/.psy-section-lede.
+   New components below:
+   .trust-bar--five (5-column trust strip),
+   .psy-crisis (prominent crisis/safety box),
+   .psy-compare (hospital-first vs MWKS-next two-column),
+   .psy-pathway (4-step care timeline),
+   .psy-treatment (treatment card grid).
+   ============================================================ */
+
+/* Trust bar — 5-column variant */
+.trust-bar--five .trust-bar__inner { grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 900px) {
+  .trust-bar--five .trust-bar__inner { grid-template-columns: repeat(2, 1fr); row-gap: var(--s-5); }
+}
+@media (max-width: 480px) {
+  .trust-bar--five .trust-bar__inner { grid-template-columns: 1fr; }
+}
+
+/* Prominent crisis / safety box */
+.psy-crisis {
+  margin: 0 0 var(--s-8);
+  padding: clamp(20px, 2.4vw, 32px) clamp(22px, 2.6vw, 36px);
+  background: #fbeae6;
+  border: 1px solid #e6b9ac;
+  border-left: 4px solid #b4452c;
+  border-radius: 0 5px 5px 0;
+}
+.psy-crisis__label {
+  margin: 0 0 var(--s-2);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.0625rem;
+  letter-spacing: -0.003em;
+  color: #8f3621;
+}
+.psy-crisis__body {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #3a3a3a;
+}
+.psy-crisis__body strong { font-weight: 400; color: #8f3621; }
+
+/* Section 2 — hospital-first vs MWKS-next comparison */
+.psy-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(20px, 2.4vw, 36px);
+  margin: var(--s-2) 0 0;
+}
+.psy-compare__col {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(24px, 2.6vw, 40px);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+}
+.psy-compare__col--hospital { background: var(--paper); }
+.psy-compare__col--next {
+  background: var(--surface);
+  border-top: 3px solid var(--accent);
+}
+.psy-compare__head {
+  margin: 0 0 var(--s-4);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: 1.1875rem;
+  line-height: 1.3;
+  letter-spacing: -0.003em;
+  color: var(--primary);
+}
+.psy-compare__list {
+  margin: 0 0 var(--s-5);
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--s-3);
+}
+.psy-compare__list li {
+  position: relative;
+  padding-left: 22px;
+  font-size: .9375rem;
+  line-height: 1.6;
+  color: #3a3a3a;
+}
+.psy-compare__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 10px;
+  height: 1px;
+  background: var(--accent);
+}
+.psy-compare__foot { margin-top: auto; }
+.psy-compare__safety {
+  margin: 0;
+  padding: var(--s-4);
+  background: #fbeae6;
+  border-left: 3px solid #b4452c;
+  border-radius: 0 5px 5px 0;
+  font-size: .875rem;
+  line-height: 1.6;
+  color: #3a3a3a;
+}
+.psy-compare__safety strong { font-weight: 400; color: #8f3621; }
+@media (max-width: 760px) {
+  .psy-compare { grid-template-columns: 1fr; }
+}
+
+/* Section 4 — 4-step care pathway timeline */
+.psy-pathway {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(20px, 2.4vw, 36px);
+  margin: var(--s-2) 0 var(--s-7);
+  position: relative;
+}
+.psy-pathway::before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--border);
+}
+.psy-pathway__step {
+  position: relative;
+  padding-top: var(--s-6);
+}
+.psy-pathway__step::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.psy-pathway__phase {
+  margin: 0 0 var(--s-2);
+  font-family: var(--font-heading);
+  font-size: .75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.psy-pathway__title {
+  margin: 0 0 var(--s-2);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: 1.0625rem;
+  line-height: 1.3;
+  letter-spacing: -0.003em;
+  color: var(--primary);
+}
+.psy-pathway__body {
+  margin: 0;
+  font-size: .9375rem;
+  line-height: 1.65;
+  color: #3a3a3a;
+}
+@media (max-width: 880px) {
+  .psy-pathway { grid-template-columns: 1fr; gap: 0; }
+  .psy-pathway::before { top: 0; bottom: 0; left: 7px; right: auto; width: 2px; height: auto; }
+  .psy-pathway__step { padding: 0 0 var(--s-6) var(--s-7); }
+  .psy-pathway__step:last-child { padding-bottom: 0; }
+  .psy-pathway__step::before { top: 2px; }
+}
+
+/* Sections 8 & 9 — treatment card grid */
+.psy-treatment {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 2vw, 28px);
+  margin: var(--s-2) 0 0;
+}
+.psy-treatment__card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--accent);
+  border-radius: 0 0 5px 5px;
+  padding: clamp(22px, 2.2vw, 32px);
+}
+.psy-treatment__title {
+  margin: 0 0 var(--s-2);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: 1.0625rem;
+  line-height: 1.3;
+  letter-spacing: -0.003em;
+  color: var(--primary);
+}
+.psy-treatment__body {
+  margin: 0;
+  font-size: .9375rem;
+  line-height: 1.7;
+  color: #3a3a3a;
+}
+@media (max-width: 900px) {
+  .psy-treatment { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .psy-treatment { grid-template-columns: 1fr; }
+}
+
+/* Section 13 — areas-served additions (.psy-areas reused from section 30) */
+.psy-areas__body + .psy-areas__body { margin-top: var(--s-3); }
+.psy-areas__address {
+  margin: var(--s-5) auto;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--primary);
+}
+
+/* Breathing room above a standalone CTA row that follows a component */
+.psy-prodrome + .page-intro__actions,
+.psy-treatment + .page-intro__actions { margin-top: var(--s-7); }
+
+@media (prefers-reduced-motion: reduce) {
+  .psy-pathway__step { transition: none; }
 }
