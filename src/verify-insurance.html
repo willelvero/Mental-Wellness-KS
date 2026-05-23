@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Verify Insurance for Mental Health Treatment | Mental Wellness KS</title>
-  <meta name="description" content="Verify your insurance for mental health treatment at Mental Wellness KS. Check benefits for residential treatment, PHP, IOP, veteran mental health services, and trauma-focused care in California.">
+  <meta name="description" content="Verify your insurance for mental health treatment at Mental Wellness KS, Palm Springs, CA. INN and OON benefits checked for residential, PHP, and IOP.">
   <link rel="canonical" href="https://mentalwellnessks.com/verify-insurance/">
 
   <meta property="og:type" content="website">
@@ -41,7 +41,7 @@
       "@type": "MedicalClinic",
       "name": "Mental Wellness KS",
       "url": "https://mentalwellnessks.com/verify-insurance/",
-      "telephone": "+1-866-460-4462",
+      "telephone": "+18664604462",
       "email": "info@mentalwellnessks.com",
       "image": "https://mentalwellnessks.com/images/healing-environment.webp",
       "priceRange": "$$$",
@@ -157,66 +157,75 @@
             <li>Reviewed by admissions</li>
           </ul>
           <!-- TODO before launch: this form is not yet wired to a submission endpoint.
-               Connect it to the client's form handler (form service or CRM) and set the
-               form action/method accordingly. As built it does not send anywhere. -->
-          <form class="vi-form" action="#" method="post" aria-label="Insurance verification">
+               Field set mirrors the sister-site (palmspringsbehavioralhealth.com) Gravity
+               Forms intake so the data captured is equivalent. To unify lead destination,
+               wire to: (a) the same inbox their GF currently notifies via a HIPAA-compliant
+               form service (Formstack HIPAA, Jotform HIPAA, etc.), (b) the Gravity Forms
+               REST API (/wp-json/gf/v2/forms/2/submissions) with a server-side proxy, or
+               (c) directly to the downstream CRM (KIPU/Salesforce) if one exists. -->
+          <form class="vi-form" action="#" method="post" aria-label="Insurance verification" novalidate>
+            <!-- Honeypot — real users won't fill this; bots typically will. Submissions with this filled should be dropped server-side. -->
+            <div class="vi-honeypot" aria-hidden="true">
+              <label for="vi-website">Website (leave blank)</label>
+              <input type="text" id="vi-website" name="_hp_website" tabindex="-1" autocomplete="off">
+            </div>
+
             <div class="vi-form__grid">
               <div class="vi-field vi-field--full">
-                <label for="vi-name">Full name <span class="req" aria-hidden="true">*</span></label>
-                <input type="text" id="vi-name" name="name" autocomplete="name" required>
+                <label for="vi-name">Name of participant <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="vi-name" name="participant_name" autocomplete="name" required>
               </div>
               <div class="vi-field">
-                <label for="vi-phone">Phone <span class="req" aria-hidden="true">*</span></label>
-                <input type="tel" id="vi-phone" name="phone" autocomplete="tel" required>
+                <label for="vi-email">Participant email <span class="req" aria-hidden="true">*</span></label>
+                <input type="email" id="vi-email" name="participant_email" autocomplete="email" required>
               </div>
               <div class="vi-field">
-                <label for="vi-email">Email <span class="req" aria-hidden="true">*</span></label>
-                <input type="email" id="vi-email" name="email" autocomplete="email" required>
+                <label for="vi-phone">Participant contact number <span class="req" aria-hidden="true">*</span></label>
+                <input type="tel" id="vi-phone" name="participant_phone" autocomplete="tel" required>
               </div>
               <div class="vi-field">
                 <label for="vi-dob">Date of birth</label>
-                <input type="date" id="vi-dob" name="date_of_birth" autocomplete="bday">
+                <input type="date" id="vi-dob" name="participant_dob" autocomplete="bday">
               </div>
               <div class="vi-field">
-                <label for="vi-contact">Preferred contact method</label>
-                <select id="vi-contact" name="preferred_contact">
-                  <option value="">Select one</option>
-                  <option value="phone">Phone call</option>
-                  <option value="text">Text message</option>
-                  <option value="email">Email</option>
-                </select>
+                <label for="vi-address">Participant address</label>
+                <input type="text" id="vi-address" name="participant_address" autocomplete="street-address">
+              </div>
+
+              <div class="vi-field vi-field--full">
+                <label for="vi-policyholder">Primary policy holder <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="vi-policyholder" name="policyholder_name" required>
               </div>
               <div class="vi-field">
-                <label for="vi-provider">Insurance provider <span class="req" aria-hidden="true">*</span></label>
-                <input type="text" id="vi-provider" name="insurance_provider" required>
+                <label for="vi-policyholder-dob">Primary policy holder DOB</label>
+                <input type="date" id="vi-policyholder-dob" name="policyholder_dob">
               </div>
               <div class="vi-field">
-                <label for="vi-member">Member ID</label>
-                <input type="text" id="vi-member" name="member_id">
-              </div>
-              <div class="vi-field">
-                <label for="vi-group">Group ID (if available)</label>
-                <input type="text" id="vi-group" name="group_id">
-              </div>
-              <div class="vi-field">
-                <label for="vi-policyholder">Policyholder name</label>
-                <input type="text" id="vi-policyholder" name="policyholder_name">
+                <label for="vi-policyholder-phone">Primary policy holder's contact number <span class="req" aria-hidden="true">*</span></label>
+                <input type="tel" id="vi-policyholder-phone" name="policyholder_phone" required>
               </div>
               <div class="vi-field vi-field--full">
-                <label for="vi-relationship">Relationship to policyholder</label>
-                <select id="vi-relationship" name="relationship_to_policyholder">
-                  <option value="">Select one</option>
-                  <option value="self">Self</option>
-                  <option value="spouse">Spouse or partner</option>
-                  <option value="parent">Parent</option>
-                  <option value="child">Child</option>
-                  <option value="other">Other</option>
-                </select>
+                <label for="vi-policyholder-address">Primary policy holder's address</label>
+                <input type="text" id="vi-policyholder-address" name="policyholder_address">
               </div>
-              <div class="vi-field vi-field--full">
-                <label for="vi-message">Brief message or treatment concern</label>
-                <textarea id="vi-message" name="message" rows="3"></textarea>
+
+              <div class="vi-field">
+                <label for="vi-company">Insurance company <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="vi-company" name="insurance_company" required>
               </div>
+              <div class="vi-field">
+                <label for="vi-member">Insurance ID</label>
+                <input type="text" id="vi-member" name="insurance_id">
+              </div>
+              <div class="vi-field">
+                <label for="vi-ins-phone">Insurance provider's phone number</label>
+                <input type="tel" id="vi-ins-phone" name="insurance_phone">
+              </div>
+              <div class="vi-field">
+                <label for="vi-group">Group #</label>
+                <input type="text" id="vi-group" name="group_number">
+              </div>
+
             </div>
 
             <label class="vi-consent">

@@ -562,7 +562,7 @@ em     { font-style: italic; color: inherit; }
   background:
     radial-gradient(ellipse 80% 65% at center, rgba(15,28,46,0.72) 0%, rgba(15,28,46,0.20) 70%, transparent 100%),
     linear-gradient(180deg, rgba(15,28,46,0.38) 0%, rgba(15,28,46,0.40) 50%, rgba(15,28,46,0.58) 100%),
-    url('../images/hero.webp') center 35% / cover no-repeat;
+    url('../images/palm-springs-desert-oasis.webp') center 35% / cover no-repeat;
 }
 @media (max-width: 768px) {
   #hero { min-height: 88svh; padding: var(--s-10) var(--s-5); }
@@ -11654,7 +11654,7 @@ em     { font-style: italic; color: inherit; }
   background-color: var(--primary);
   background-image:
     linear-gradient(102deg, rgba(16,27,45,0.95) 0%, rgba(19,32,53,0.88) 50%, rgba(31,58,95,0.62) 100%),
-    url("../images/programs/php.webp");
+    url("../images/programs/partial-hospitalization-program.webp");
   background-size: cover;
   background-position: center 38%;
   color: #fff;
@@ -12644,3 +12644,110 @@ em     { font-style: italic; color: inherit; }
   .tour-plan__actions .btn,
   .tour-close__btns .tour-cta { width: 100%; }
 }
+
+/* ============================================================
+   HOMEPAGE — additions for "When Symptoms Need More Support"
+   section, tightened Founder section, and 8-question FAQ.
+   New components: .support-* (intro + benefits card + bullets),
+   .founder-subhead (italic deck above body), .founder-proofs
+   (4-up uppercase tag row below credentials).
+   ============================================================ */
+
+/* When-symptoms section ------------------------------------- */
+.support-intro {
+  max-width: 760px;
+  margin-bottom: var(--s-7);
+}
+.support-intro p {
+  margin: 0 0 var(--s-4);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: #3a3a3a;
+}
+.support-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-lg);
+  padding: clamp(28px, 3vw, 40px);
+  margin: 0 0 var(--s-6);
+}
+.support-card__title {
+  margin: 0 0 var(--s-5);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: none;
+  font-size: 1.125rem;
+  color: var(--primary);
+}
+.support-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-4) var(--s-6);
+}
+.support-list li {
+  position: relative;
+  padding-left: 22px;
+  font-size: .9375rem;
+  line-height: 1.55;
+  color: #3a3a3a;
+}
+.support-list li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 10px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+#when-support .section-cta { margin-top: var(--s-6); }
+@media (max-width: 700px) {
+  .support-list { grid-template-columns: 1fr; }
+}
+
+/* Founder subheading + proof-point tag row ------------------ */
+.founder-subhead {
+  margin: 0 0 var(--s-5);
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.0625rem;
+  letter-spacing: 0.01em;
+  color: var(--accent-deep);
+}
+.founder-proofs {
+  list-style: none;
+  margin: var(--s-6) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+}
+.founder-proofs li {
+  padding: 6px 14px;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-family: var(--font-heading);
+  font-size: .75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+
+/* Form honeypot — hidden anti-spam field, must stay in DOM ---- */
+.vi-honeypot {
+  position: absolute !important;
+  left: -9999px !important;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Verify-insurance form-card title + trust signals row centered
+   (page-scoped so the contact-page form-card stays left-aligned). */
+.page-verify .vi-form-card__title { text-align: center; }
+.page-verify .vi-form-card__signals { justify-content: center; }

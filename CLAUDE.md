@@ -87,18 +87,30 @@ Palm Springs, Cathedral City, Rancho Mirage, Palm Desert, Indio, La Quinta, Coac
 
 ## Image library (in `images/`)
 
-- `hero.webp` — homepage hero (renamed from the existing site's `treatment-1.webp`)
-- `hero-banner.webp`, `healing-environment.webp` — inner-page hero options
+Filenames are descriptive (content-based, not role-based) for image-search SEO. When adding a new image, follow this convention — describe what the photo shows, not where it's used.
+
+- `palm-springs-desert-oasis.webp` — homepage hero (palms + reflection pool + mountains; previously `hero.webp`)
+- `outdoor-gazebo-lounge.webp` — inner-page hero option (gazebo + red seating + putting green; previously `hero-banner.webp`), used on the IOP page
+- `healing-environment.webp`, `facility-tour.webp` — interior recreation-area shots
 - `logo.svg` — brand logo (heavy at ~290 KB; optimize with SVGO before final launch)
-- `team/ken-seeley-1..5.webp` — five Ken Seeley photos (also heavy, 3–4 MB each — optimize)
-- `programs/{php,iop,veteran-services}.webp` — program-card images
+- `team/ken-seeley-hawaii.webp` — Ken in front of Koko Crater (previously `ken-seeley-1.webp`)
+- `team/ken-seeley-air-force-portrait.webp` — young Ken, formal Air Force dress portrait (previously `ken-seeley-2.webp`) — currently unused; available for veteran-services framing
+- `team/ken-seeley-palm-springs.webp` — Ken in blue blazer with bougainvillea (previously `ken-seeley-3.webp`)
+- `team/ken-seeley-air-force-young.webp` — vintage candid of Ken in fatigues (previously `ken-seeley-4.webp`)
+- `team/ken-seeley-headshot.webp` — professional studio headshot (previously `ken-seeley-5.webp`)
+- `team/eric-mclaughlin.webp` — Eric McLaughlin headshot (converted from the original `.jpg`)
+- `programs/{partial-hospitalization-program,intensive-outpatient-program,residential,veteran-services}.webp` — program-card images (acronyms `php`/`iop` were spelled out for image-search SEO)
 - `process/{connect,clinical-assessment,insurance,begin-treatment}.webp` — small process-step icons (~5–14 KB each)
-- `insurance/{aetna,bluecross_blueshield,cigna_healthcare,medica,tricare,triwest,united_behavioral_health,united_health_care,value_options}.webp` — carrier logos
+- `insurance/{aetna,blue-cross-blue-shield,cigna-healthcare,medica,tricare,triwest,united-behavioral-health,united-healthcare,value-options}.webp` — carrier logos
 - `social/{facebook,instagram,linkedin,x,youtube}.svg` — social icons (no links wired yet; awaiting profile URLs)
+
+The Ken Seeley team photos are still heavy (3–4 MB each); optimize with `sharp` before launch.
 
 ## Stack
 
 Standard agency stack: static HTML/CSS/JS, Node build (`scripts/build-html.mjs`). After editing any `src/` or `partials/` file, run `npm run build`.
+
+The build minifies all three asset types: CSS via `csso`, JS via `terser`, and HTML via `html-minifier-terser` (collapses whitespace, strips comments, minifies inline `<style>`/`<script>` — preserves `<!-- TODO ... -->` markers). HTML minification saves ~13% across the site.
 
 ## SEO conventions on this site
 

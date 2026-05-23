@@ -20,13 +20,23 @@ function backup(rel) {
 async function reencodeWebp(rel, { width, quality }) {
   const file = path.join(imgDir, rel);
   if (!fs.existsSync(file)) { console.log('  skip (missing):', rel); return; }
+  // Idempotent: if a backup already exists, this file was processed in a previous run.
+  // Re-encoding lossy formats degrades quality, so skip.
+  const backupPath = path.join(backupDir, rel);
+  if (fs.existsSync(backupPath)) {
+    console.log(`  ${rel.padEnd(45)} (already optimized, skipping)`);
+    return;
+  }
   backup(rel);
   const before = fs.statSync(file).size;
   const buf = await sharp(file)
     .resize({ width, withoutEnlargement: true })
     .webp({ quality, effort: 6 })
     .toBuffer();
-  fs.writeFileSync(file, buf);
+  // Never make a file bigger.
+  if (buf.length < before) {
+    fs.writeFileSync(file, buf);
+  }
   const after = fs.statSync(file).size;
   console.log(`  ${rel.padEnd(45)} ${(before/1024).toFixed(0).padStart(6)} KB → ${(after/1024).toFixed(0).padStart(5)} KB`);
 }
@@ -60,9 +70,18 @@ await reencodeWebp('hero.webp', { width: 1920, quality: 72 });
 await reencodeWebp('hero-banner.webp', { width: 1200, quality: 72 });
 
 console.log('Programs:');
-for (const f of ['php.webp', 'iop.webp', 'veteran-services.webp']) {
+for (const f of ['php.webp', 'iop.webp', 'veteran-services.webp', 'residential.webp']) {
   await reencodeWebp(`programs/${f}`, { width: 1200, quality: 75 });
 }
+
+console.log('Facility (rooms gallery):');
+for (const f of ['exterior.webp', 'living-room.webp', 'kitchen.webp', 'bedroom.webp', 'bathroom.webp', 'patio.webp']) {
+  await reencodeWebp(`facility/${f}`, { width: 1600, quality: 78 });
+}
+
+console.log('Other large heroes / cards:');
+await reencodeWebp('healing-environment.webp', { width: 1600, quality: 78 });
+await reencodeWebp('facility-tour.webp',       { width: 1200, quality: 78 });
 
 console.log('Team (carousel — biggest savings here):');
 for (const f of ['ken-seeley-1.webp','ken-seeley-2.webp','ken-seeley-3.webp','ken-seeley-4.webp','ken-seeley-5.webp']) {
