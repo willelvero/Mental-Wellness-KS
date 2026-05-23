@@ -19,7 +19,9 @@
   <meta name="twitter:description" content="Veteran-owned mental health treatment center in Palm Springs, California. Residential, PHP, and IOP options for adults.">
   <meta name="twitter:image" content="https://mentalwellnessks.com/images/palm-springs-desert-oasis.webp">
 
-  <link rel="preload" as="image" href="images/palm-springs-desert-oasis.webp" fetchpriority="high">
+  <!-- LCP hero: media-conditioned preloads so mobile fetches the 36 KB 800w version and desktop fetches the 105 KB 1600w version -->
+  <link rel="preload" as="image" href="images/palm-springs-desert-oasis-800w.webp" media="(max-width: 768px)" fetchpriority="high">
+  <link rel="preload" as="image" href="images/palm-springs-desert-oasis-1600w.webp" media="(min-width: 769px)" fetchpriority="high">
 
 <!-- include:head-assets -->
 
@@ -185,7 +187,7 @@
 
         <h1 id="hero-title" class="hero-subtitle">Mental Health Treatment Center in Palm Springs, California</h1>
 
-        <p class="hero-lede">Structured mental health treatment in Palm Springs for adults seeking clinical support in a safe, supportive environment.</p>
+        <p class="hero-lede">Structured mental health treatment in Palm Springs for adults seeking clinical care in a safe, supportive environment.</p>
 
         <div class="hero-actions">
           <a class="hero-action hero-action--primary" href="tel:+18664604462">
@@ -210,45 +212,57 @@
       <div class="container program-grid">
         <article class="program-block">
           <div class="program-block__image">
-            <img src="{{base}}images/programs/residential.webp" alt="Residential mental health treatment in Palm Springs" loading="lazy" decoding="async" width="600" height="400">
+            <img src="{{base}}images/programs/residential-900w.webp"
+                 srcset="{{base}}images/programs/residential-500w.webp 500w, {{base}}images/programs/residential-900w.webp 900w"
+                 sizes="(min-width: 768px) 600px, 100vw"
+                 alt="Residential mental health treatment in Palm Springs" loading="lazy" decoding="async" width="900" height="600">
           </div>
           <div class="program-block__text">
             <h3>Residential Mental Health Treatment</h3>
             <p>Twenty-four-hour structured care for adults whose symptoms have outpaced outpatient support. Residential treatment may include psychiatric care, therapy, medication support when clinically appropriate, family education, daily structure, and step-down planning.</p>
-            <a class="program-link" href="{{base}}residential-mental-health-treatment-california/">Learn More</a>
+            <a class="program-link" href="{{base}}residential-mental-health-treatment-california/">Learn about Residential Treatment</a>
           </div>
         </article>
 
         <article class="program-block">
           <div class="program-block__image">
-            <img src="{{base}}images/programs/veteran-services.webp" alt="Veteran mental health services" loading="lazy" decoding="async" width="600" height="400">
+            <img src="{{base}}images/programs/veteran-services-900w.webp"
+                 srcset="{{base}}images/programs/veteran-services-500w.webp 500w, {{base}}images/programs/veteran-services-900w.webp 900w"
+                 sizes="(min-width: 768px) 600px, 100vw"
+                 alt="Veteran mental health services" loading="lazy" decoding="async" width="900" height="600">
           </div>
           <div class="program-block__text">
             <h3>Veteran Mental Health Services</h3>
             <p>Veteran-owned, trauma-focused mental health services for veterans and active-duty service members struggling with PTSD, trauma, depression, anxiety, moral injury, sleep disruption, and co-occurring concerns when clinically appropriate.</p>
-            <a class="program-link" href="{{base}}veterans-mental-health-services-california/">Learn More</a>
+            <a class="program-link" href="{{base}}veterans-mental-health-services-california/">Learn about Veteran Services</a>
           </div>
         </article>
 
         <article class="program-block">
           <div class="program-block__image">
-            <img src="{{base}}images/programs/partial-hospitalization-program.webp" alt="Partial Hospitalization at Mental Wellness KS" loading="lazy" decoding="async" width="600" height="400">
+            <img src="{{base}}images/programs/partial-hospitalization-program-900w.webp"
+                 srcset="{{base}}images/programs/partial-hospitalization-program-500w.webp 500w, {{base}}images/programs/partial-hospitalization-program-900w.webp 900w"
+                 sizes="(min-width: 768px) 600px, 100vw"
+                 alt="Partial Hospitalization at Mental Wellness KS" loading="lazy" decoding="async" width="900" height="600">
           </div>
           <div class="program-block__text">
             <h3>Partial Hospitalization Program</h3>
             <p>PHP is a structured, full-day level of mental health treatment without overnight residential care. It typically includes therapy, group programming, psychiatric support when appropriate, skills practice, and step-down planning for clients who need more support than weekly outpatient care.</p>
-            <a class="program-link" href="{{base}}partial-hospitalization-program-california/">Learn More</a>
+            <a class="program-link" href="{{base}}partial-hospitalization-program-california/">Learn about the PHP Program</a>
           </div>
         </article>
 
         <article class="program-block">
           <div class="program-block__image">
-            <img src="{{base}}images/programs/intensive-outpatient-program.webp" alt="Intensive Outpatient Program at Mental Wellness KS" loading="lazy" decoding="async" width="600" height="400">
+            <img src="{{base}}images/programs/intensive-outpatient-program-900w.webp"
+                 srcset="{{base}}images/programs/intensive-outpatient-program-500w.webp 500w, {{base}}images/programs/intensive-outpatient-program-900w.webp 900w"
+                 sizes="(min-width: 768px) 600px, 100vw"
+                 alt="Intensive Outpatient Program at Mental Wellness KS" loading="lazy" decoding="async" width="900" height="600">
           </div>
           <div class="program-block__text">
             <h3>Intensive Outpatient Program</h3>
             <p>IOP is a structured outpatient level of care that provides more support than weekly therapy while allowing clients to continue daily responsibilities. It typically includes therapy, group support, coping skills, relapse-prevention planning, and ongoing clinical guidance.</p>
-            <a class="program-link" href="{{base}}intensive-outpatient-program-california/">Learn More</a>
+            <a class="program-link" href="{{base}}intensive-outpatient-program-california/">Learn about the IOP Program</a>
           </div>
         </article>
       </div>

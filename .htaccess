@@ -1,0 +1,99 @@
+# Mental Wellness KS — Apache config
+# ----------------------------------------------------------------------
+# Goals: long-cache static assets, short-cache HTML, enable compression,
+# set the security headers Lighthouse Best Practices flags.
+
+# ----- Compression -----------------------------------------------------
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/css text/xml
+  AddOutputFilterByType BROTLI_COMPRESS application/javascript application/x-javascript
+  AddOutputFilterByType BROTLI_COMPRESS application/json application/ld+json
+  AddOutputFilterByType BROTLI_COMPRESS application/xml application/rss+xml application/atom+xml
+  AddOutputFilterByType BROTLI_COMPRESS image/svg+xml font/ttf font/otf application/font-woff application/font-woff2
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+  AddOutputFilterByType DEFLATE application/json application/ld+json
+  AddOutputFilterByType DEFLATE application/xml application/rss+xml application/atom+xml
+  AddOutputFilterByType DEFLATE image/svg+xml font/ttf font/otf application/font-woff application/font-woff2
+</IfModule>
+
+# ----- Cache headers ---------------------------------------------------
+# Static assets are content-hashed via ?v= query strings in markup, so we
+# can safely set immutable + 1 year. HTML stays short-cache so content
+# updates propagate fast.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault                              "access plus 1 month"
+
+  # HTML — let the network revalidate so edits go live quickly
+  ExpiresByType text/html                     "access plus 0 seconds"
+
+  # Long-lived static assets
+  ExpiresByType text/css                      "access plus 1 year"
+  ExpiresByType application/javascript        "access plus 1 year"
+  ExpiresByType image/webp                    "access plus 1 year"
+  ExpiresByType image/avif                    "access plus 1 year"
+  ExpiresByType image/jpeg                    "access plus 1 year"
+  ExpiresByType image/png                     "access plus 1 year"
+  ExpiresByType image/svg+xml                 "access plus 1 year"
+  ExpiresByType image/x-icon                  "access plus 1 year"
+  ExpiresByType font/woff                     "access plus 1 year"
+  ExpiresByType font/woff2                    "access plus 1 year"
+  ExpiresByType application/font-woff         "access plus 1 year"
+  ExpiresByType application/font-woff2        "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Long, immutable cache for hashed/versioned static assets
+  <FilesMatch "\.(css|js|webp|avif|jpe?g|png|svg|ico|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # HTML: revalidate every request so content updates propagate
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+
+  # ----- Security headers (Lighthouse Best Practices) ------------------
+  # HSTS — force HTTPS for 6 months, include subdomains, preload-ready
+  Header always set Strict-Transport-Security "max-age=15552000; includeSubDomains"
+
+  # Prevent MIME-type sniffing
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Clickjacking protection — only allow framing from same origin (the Google Maps embed loads in our iframe, not us in theirs)
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Referrer hygiene
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Cross-origin isolation
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+
+  # Limit browser feature exposure
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+</IfModule>
+
+# ----- Pretty URLs / index handling ------------------------------------
+DirectoryIndex index.html index.php
+
+# Strip trailing .html from URLs if anyone hits them directly
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Redirect /foo.html -> /foo/
+  RewriteCond %{THE_REQUEST} \s/+(.+?)/index\.html[\s?] [NC]
+  RewriteRule ^ /%1/ [R=301,L]
+
+  # Force HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+# ----- MIME types ------------------------------------------------------
+AddType image/webp .webp
+AddType image/avif .avif
+AddType font/woff2 .woff2

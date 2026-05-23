@@ -562,10 +562,18 @@ em     { font-style: italic; color: inherit; }
   background:
     radial-gradient(ellipse 80% 65% at center, rgba(15,28,46,0.72) 0%, rgba(15,28,46,0.20) 70%, transparent 100%),
     linear-gradient(180deg, rgba(15,28,46,0.38) 0%, rgba(15,28,46,0.40) 50%, rgba(15,28,46,0.58) 100%),
-    url('../images/palm-springs-desert-oasis.webp') center 35% / cover no-repeat;
+    url('../images/palm-springs-desert-oasis-1600w.webp') center 35% / cover no-repeat;
 }
+/* Mobile gets the 800w hero (~36 KB instead of 105 KB) — matches the media-conditioned preload in <head> */
 @media (max-width: 768px) {
-  #hero { min-height: 88svh; padding: var(--s-10) var(--s-5); }
+  #hero {
+    min-height: 88svh;
+    padding: var(--s-10) var(--s-5);
+    background:
+      radial-gradient(ellipse 80% 65% at center, rgba(15,28,46,0.72) 0%, rgba(15,28,46,0.20) 70%, transparent 100%),
+      linear-gradient(180deg, rgba(15,28,46,0.38) 0%, rgba(15,28,46,0.40) 50%, rgba(15,28,46,0.58) 100%),
+      url('../images/palm-springs-desert-oasis-800w.webp') center 35% / cover no-repeat;
+  }
 }
 
 /* Faint horizon line above center — pure decoration */
@@ -630,18 +638,21 @@ em     { font-style: italic; color: inherit; }
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%);
-  width: 0;
+  /* width fixed; we animate transform: scaleX so the keyframe runs on the
+     compositor instead of triggering layout (Lighthouse non-composited fix) */
+  width: 56px;
   height: 1px;
   background: var(--accent);
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
   animation: subtitleRule 1.2s 0.95s cubic-bezier(.2,.7,.2,1) forwards;
 }
 @keyframes subtitleRule {
-  from { width: 0; }
-  to   { width: 56px; }
+  from { transform: translateX(-50%) scaleX(0); }
+  to   { transform: translateX(-50%) scaleX(1); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-subtitle::after { width: 56px; animation: none; }
+  .hero-subtitle::after { transform: translateX(-50%) scaleX(1); animation: none; }
 }
 
 /* Rotating word — natural content width so "A path to [word]" reads as a  */
