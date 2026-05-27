@@ -795,7 +795,6 @@ em     { font-style: italic; color: inherit; }
 /* ---------------------------------------------- 9. Programs — alternating */
 #programs {
   background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
-  counter-reset: programs;
   padding-bottom: var(--s-9);
 }
 
@@ -815,7 +814,6 @@ em     { font-style: italic; color: inherit; }
 }
 
 .program-block {
-  counter-increment: programs;
   display: flex;
   flex-direction: column;
   gap: var(--s-4);
@@ -846,18 +844,6 @@ em     { font-style: italic; color: inherit; }
 .program-block:hover .program-block__image img { transform: scale(1.02); }
 
 .program-block__text { position: relative; padding-top: var(--s-2); }
-.program-block__text::before {
-  content: counter(programs, decimal-leading-zero);
-  display: block;
-  font-family: var(--font-heading);
-  font-size: 1.375rem;
-  font-weight: 400;
-  color: var(--accent);
-  letter-spacing: 0.04em;
-  line-height: 1;
-  margin-bottom: var(--s-2);
-  opacity: 0.85;
-}
 .program-block__text h3 {
   font-size: clamp(1.125rem, 1vw + 0.5rem, 1.5rem);
   color: var(--primary);
@@ -12548,11 +12534,12 @@ em     { font-style: italic; color: inherit; }
   gap: var(--s-3);
 }
 .tour-locate__name {
-  margin: 0;
+  margin: 0 0 var(--s-2);
   font-family: var(--font-heading);
-  font-size: 1.0625rem;
+  font-size: clamp(1.375rem, 1vw + 0.875rem, 1.625rem);
   letter-spacing: 0.04em;
-  color: #fff;
+  text-transform: uppercase;
+  color: var(--accent);
 }
 .tour-locate__address {
   font-style: normal;
@@ -12762,3 +12749,195 @@ em     { font-style: italic; color: inherit; }
    (page-scoped so the contact-page form-card stays left-aligned). */
 .page-verify .vi-form-card__title { text-align: center; }
 .page-verify .vi-form-card__signals { justify-content: center; }
+
+/* ============================================================
+   TOUR GALLERY — editorial gallery for the facility tour rooms.
+   Six visually-distinct compositional "moments" inside a 12-col
+   asymmetric grid. Replaces the prior .tour-rooms slab stack.
+   ============================================================ */
+
+.tour-gallery {
+  position: relative;
+  padding: clamp(72px, 9vw, 140px) 0 clamp(110px, 12vw, 180px);
+  background:
+    radial-gradient(ellipse 70% 45% at 50% 0%, rgba(201, 165, 116, 0.055), transparent 65%),
+    linear-gradient(180deg, var(--bg) 0%, #EEEAE2 100%);
+}
+
+.tour-gallery__hed {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: clamp(20px, 3vw, 40px);
+  margin-bottom: clamp(56px, 7vw, 96px);
+}
+.tour-gallery__rule {
+  display: block;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(160, 129, 77, 0), rgba(160, 129, 77, 0.55));
+}
+.tour-gallery__eyebrow {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 0.6875rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  white-space: nowrap;
+}
+
+.tour-gallery__grid {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 4vw, 48px);
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: clamp(16px, 2.4vw, 32px);
+  row-gap: clamp(48px, 6vw, 96px);
+}
+
+/* Tile primitive */
+.tour-tile {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 1.2vw, 20px);
+}
+.tour-tile figure {
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 3px;
+  background: #E5E3DD;
+  aspect-ratio: 4 / 3;
+  isolation: isolate;
+}
+.tour-tile figure::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 70px rgba(31, 58, 95, 0.10);
+  border-radius: inherit;
+  z-index: 2;
+}
+.tour-tile img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+  filter: saturate(0.96);
+}
+.tour-tile:hover img,
+.tour-tile:focus-within img {
+  transform: scale(1.035);
+  filter: saturate(1.08) brightness(1.02);
+}
+.tour-tile__title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(0.9375rem, 0.4vw + 0.8rem, 1.0625rem);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.tour-tile__title::before {
+  content: "";
+  flex: 0 0 18px;
+  height: 1px;
+  background: var(--accent);
+  transition: flex-basis 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tour-tile:hover .tour-tile__title::before {
+  flex-basis: 32px;
+}
+
+/* Aspect-ratio variants */
+.tour-tile--editorial figure { aspect-ratio: 16 / 9; }
+.tour-tile--hero figure       { aspect-ratio: 21 / 9; }
+
+/* Moment 1 — Diptych asymmetric (Common Room + Kitchen) */
+.tour-tile--m1a { grid-column: 1 / span 7; }
+.tour-tile--m1b {
+  grid-column: 8 / span 5;
+  margin-top: clamp(40px, 6vw, 90px);
+}
+
+/* Moment 2 — Off-center single tile (Bedrooms) */
+.tour-tile--m2 { grid-column: 5 / span 6; }
+
+/* Moment 3 — Triptych with middle offset (Bathrooms, Courtyard, Group Room) */
+.tour-tile--m3a { grid-column: 1 / span 4; }
+.tour-tile--m3b {
+  grid-column: 5 / span 4;
+  margin-top: clamp(48px, 7vw, 110px);
+}
+.tour-tile--m3c { grid-column: 9 / span 4; }
+
+/* Moment 4 — Editorial wide (Dining Room) */
+.tour-tile--m4 { grid-column: 2 / span 10; }
+.tour-tile--m4 .tour-tile__title {
+  font-size: clamp(1.0625rem, 0.8vw + 0.75rem, 1.25rem);
+  letter-spacing: 0.24em;
+  margin-top: clamp(8px, 1vw, 16px);
+}
+
+/* Moment 5 — Diptych offset opposite (Recreation + Outdoor Lounge) */
+.tour-tile--m5a {
+  grid-column: 1 / span 6;
+  margin-top: clamp(40px, 6vw, 90px);
+}
+.tour-tile--m5b { grid-column: 7 / span 6; }
+
+/* Moment 6 — Hero closer (Backyard) */
+.tour-tile--m6 { grid-column: 1 / span 12; }
+.tour-tile--m6 .tour-tile__title {
+  justify-content: center;
+  font-size: clamp(1.25rem, 1.6vw + 0.5rem, 1.75rem);
+  letter-spacing: 0.28em;
+  margin-top: clamp(16px, 2vw, 28px);
+}
+.tour-tile--m6 .tour-tile__title::before { display: none; }
+
+/* Mobile collapse */
+@media (max-width: 820px) {
+  .tour-gallery__hed {
+    grid-template-columns: 1fr;
+    gap: var(--s-3);
+  }
+  .tour-gallery__rule {
+    width: 56px;
+    background: linear-gradient(90deg, rgba(160, 129, 77, 0.55), rgba(160, 129, 77, 0));
+  }
+
+  .tour-gallery__grid {
+    grid-template-columns: 1fr;
+    row-gap: clamp(36px, 7vw, 56px);
+  }
+
+  .tour-tile,
+  .tour-tile--m1a, .tour-tile--m1b,
+  .tour-tile--m2,
+  .tour-tile--m3a, .tour-tile--m3b, .tour-tile--m3c,
+  .tour-tile--m4,
+  .tour-tile--m5a, .tour-tile--m5b,
+  .tour-tile--m6 {
+    grid-column: 1 / -1;
+    margin-top: 0;
+  }
+
+  .tour-tile--editorial figure,
+  .tour-tile--hero figure { aspect-ratio: 4 / 3; }
+
+  .tour-tile--m6 .tour-tile__title {
+    justify-content: flex-start;
+    font-size: clamp(1rem, 1vw + 0.8rem, 1.125rem);
+    letter-spacing: 0.2em;
+  }
+  .tour-tile--m6 .tour-tile__title::before { display: inline-block; }
+}
